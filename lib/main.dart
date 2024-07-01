@@ -19,14 +19,16 @@ class App extends StatelessWidget {
           useMaterial3: true,
         ),
         routes: <String, WidgetBuilder>{
-          '/': (BuildContext context) => const ContacstPage(),
+          '/': (BuildContext context) => ContacstPage(),
           '/createContact': (BuildContext context) => CreateContact(controllerNewContact: TextEditingController()),
         });
   }
 }
 
 class ContacstPage extends StatelessWidget {
-  const ContacstPage({super.key});
+  ContacstPage({super.key});
+
+  final ContactBook contacts = ContactBook();
 
   @override
   Widget build(BuildContext context) {
@@ -37,20 +39,15 @@ class ContacstPage extends StatelessWidget {
         title: const Text('Contacts List'),
       ),
       body: ValueListenableBuilder(
-        valueListenable: ContactBook(),
+        valueListenable: contacts,
         builder: (context, value, child) {
           return ListView.builder(
-            itemCount: ContactBook().length,
+            itemCount: contacts.length,
             itemBuilder: (BuildContext context, int index) {
-              final Contact contact = value[index];
-              if (value.isEmpty) {
-                return const ListTile(
-                  title: Text('empty'),
-                );
-              }
+              final Contact? contact = contacts.getContact(index);
               return ListTile(
                 title: Text(
-                  contact.name,
+                  contact?.name??'',
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
               );
