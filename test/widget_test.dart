@@ -13,18 +13,22 @@ import 'package:statemanager/main.dart';
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    await tester.pumpWidget(const App());
+    await tester.pumpWidget(const ContacstPage());
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+    // Verify that the initial screen is an empty list.
+    expect(find.text('empty'), findsOneWidget);
+    expect(find.text('something'), findsNothing);
 
-    // Tap the '+' icon and trigger a frame.
+    // Tap the '+' icon and open a new page.
     await tester.tap(find.byIcon(Icons.add));
     await tester.pump();
 
+    // interact with the new page to fulfil the test contact name
+    await tester.enterText(find.byType(TextField), 'something');
+    await tester.tap(find.text('Save'));
+
     // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    expect(find.text('empty'), findsNothing);
+    expect(find.text('something'), findsOneWidget);
   });
 }
