@@ -4,7 +4,7 @@ import 'package:statemanager/contact.dart';
 void main() {
   runApp(
     MaterialApp(
-      title: 'Flutter Demo',
+      title: 'State Manager 101',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: const Color.fromARGB(255, 37, 168, 107)),
