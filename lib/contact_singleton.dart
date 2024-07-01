@@ -1,15 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:statemanager/contact_model.dart';
 import 'package:uuid/uuid.dart';
 
-class Contact {
-  final String uuid;
-  final String name;
 
-  Contact({
-    required this.name,
-  })  : assert(name.isNotEmpty),
-        uuid = const Uuid().v4();
-}
 
 class ContactBook extends ValueNotifier<List<Contact>> {
   

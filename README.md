@@ -1,16 +1,13 @@
 # statemanager
 
-A new Flutter project.
+Many branches with all types of state management 
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+This project is a starting point for a State Management Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
+You can clone a specific snippet project to avoid mistructure the concepts.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+-  Singleton + ValueNotifier
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+    - `git clone --depth 1 -b vanilla_state_manager_crud `

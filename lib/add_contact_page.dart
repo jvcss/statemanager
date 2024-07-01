@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:statemanager/contact_model.dart';
 import 'package:statemanager/contact_singleton.dart';
 
 class CreateContact extends StatefulWidget {

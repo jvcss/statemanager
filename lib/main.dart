@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:statemanager/contact_page.dart';
+import 'package:statemanager/add_contact_page.dart';
 import 'package:statemanager/contact_singleton.dart';
+import 'package:statemanager/contact_model.dart';
 
 void main() {
   runApp(const App());
