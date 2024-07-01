@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:statemanager/contact_singleton.dart';
 
 class CreateContact extends StatefulWidget {
   final TextEditingController controllerNewContact;
@@ -29,6 +30,7 @@ class _CreateContactState extends State<CreateContact> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
+          ContactBook().addContact(Contact(name: widget.controllerNewContact.text));
           Navigator.pop(context);
         },
         tooltip: 'Create',

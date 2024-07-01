@@ -19,7 +19,7 @@ class App extends StatelessWidget {
           useMaterial3: true,
         ),
         routes: <String, WidgetBuilder>{
-          '/': (BuildContext context) => ContacstPage(),
+          '/': (BuildContext context) => const ContacstPage(),
           '/createContact': (BuildContext context) => CreateContact(controllerNewContact: TextEditingController()),
         });
   }
