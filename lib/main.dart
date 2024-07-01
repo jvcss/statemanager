@@ -26,9 +26,7 @@ class App extends StatelessWidget {
 }
 
 class ContacstPage extends StatelessWidget {
-  ContacstPage({super.key});
-
-  final ContactBook contacts = ContactBook();
+  const ContacstPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -39,15 +37,16 @@ class ContacstPage extends StatelessWidget {
         title: const Text('Contacts List'),
       ),
       body: ValueListenableBuilder(
-        valueListenable: contacts,
+        valueListenable: ContactBook(),
         builder: (context, value, child) {
+          final List<Contact> actualListContant = value;
           return ListView.builder(
-            itemCount: contacts.length,
+            itemCount: actualListContant.length,
             itemBuilder: (BuildContext context, int index) {
-              final Contact? contact = contacts.getContact(index);
+              final contact = actualListContant[index];
               return ListTile(
                 title: Text(
-                  contact?.name??'',
+                  contact.name,
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
               );
