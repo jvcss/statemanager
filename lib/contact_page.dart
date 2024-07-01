@@ -72,7 +72,7 @@ class _CreateContactState extends State<CreateContact> {
         onPressed: () {
           Navigator.pop(context);
         },
-        tooltip: 'e',
+        tooltip: 'Create',
         child: const Icon(Icons.plus_one),
       ),
     );

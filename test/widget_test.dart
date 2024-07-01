@@ -24,7 +24,7 @@ void main() {
 
     // interact with the new page to fulfil the test contact name
     await tester.enterText(find.byType(TextField), 'something');
-    await tester.tap(find.text('Save'));
+    await tester.tap(find.text('Create'));
 
     // Verify that our counter has incremented.
     expect(find.text('empty'), findsNothing);
