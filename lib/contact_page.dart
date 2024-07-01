@@ -31,8 +31,8 @@ class ContacstPage extends StatelessWidget {
         },
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.pushNamed(context, '/createContact');
+        onPressed: () async {
+          await Navigator.pushNamed(context, '/createContact');
         },
         tooltip: 'Increment',
         child: const Icon(Icons.add),
@@ -70,9 +70,6 @@ class _CreateContactState extends State<CreateContact> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          setState(() {
-            ContactBook().addContact(Contact(name: widget.controllerNewContact.text));
-          });
           Navigator.pop(context);
         },
         tooltip: 'e',
