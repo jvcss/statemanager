@@ -36,15 +36,14 @@ class ContacstPage extends StatelessWidget {
         centerTitle: true,
         title: const Text('Contacts List'),
       ),
-      body: ListenableBuilder(
-        listenable: ContactBook(),
-        builder: ((context, child) {
+      body: ValueListenableBuilder(
+        valueListenable: ContactBook(),
+        builder: (context, value, child) {
           return ListView.builder(
-            prototypeItem: const ListTile(title: Text('---------')),
             itemCount: ContactBook().length,
             itemBuilder: (BuildContext context, int index) {
-              final Contact? contact = ContactBook().getContact(index);
-              if (contact == null) {
+              final Contact contact = value[index];
+              if (value.isEmpty) {
                 return const ListTile(
                   title: Text('empty'),
                 );
@@ -57,7 +56,7 @@ class ContacstPage extends StatelessWidget {
               );
             },
           );
-        }),
+        },
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
