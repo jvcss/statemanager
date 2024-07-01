@@ -12,7 +12,7 @@ import 'package:statemanager/main.dart';
 void main() {
   testWidgets('Add Contact Test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    await tester.pumpWidget(const App());
+    await tester.pumpWidget( App());
 
     // Verify that the initial screen is an empty list.
     expect(find.text('No contacts found'), findsOneWidget);

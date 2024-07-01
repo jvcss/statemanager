@@ -1,18 +1,22 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const App());
+  runApp(App());
 }
 
 class App extends StatelessWidget {
-  const App({super.key});
+  App({super.key});
+  Color green = const Color.fromRGBO(1, 204, 160, 1);
+  Color backgroundColor = const Color.fromRGBO(26, 31, 36, 1);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'State Manager 101',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: const Color.fromARGB(255, 37, 168, 107)),
+        colorScheme: ColorScheme.fromSeed(seedColor: green),
+        //brightness: Brightness.dark,
         useMaterial3: true,
       ),
       routes: <String, WidgetBuilder>{
@@ -24,7 +28,6 @@ class App extends StatelessWidget {
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,8 +36,37 @@ class HomePage extends StatelessWidget {
         centerTitle: true,
         title: const Text('Home'),
       ),
-      body: const Center(
-        child: Text('nothing found'),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: <Widget>[
+            Material(
+              color: Theme.of(context).colorScheme.inverseSurface,
+              elevation: 7,
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Text(
+                  'Home Page',
+                  style: TextStyle(
+                    color: Theme.of(context).colorScheme.onInverseSurface,
+                    fontSize: 24,
+                  ),
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(18.0),
+              child: TextField(
+                decoration: InputDecoration(
+                  border: UnderlineInputBorder(borderRadius: BorderRadius.circular(10)),
+                  labelText: 'Enter your username',
+                  //hintText: 'Enter your name',
+                ),
+              ),
+            ),
+            const Text('This is the Home Page'),
+          ],
+        ),
       ),
     );
   }
