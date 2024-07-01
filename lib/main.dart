@@ -10,7 +10,6 @@ void main() {
         colorScheme: ColorScheme.fromSeed(seedColor: const Color.fromARGB(255, 37, 168, 107)),
         useMaterial3: true,
       ),
-      home: const ContacstPage(),
       routes:  <String, WidgetBuilder> {
         '/': (BuildContext context) => const ContacstPage(),
         '/createContact': (BuildContext context) => CreateContact(controllerNewContact: TextEditingController()),
