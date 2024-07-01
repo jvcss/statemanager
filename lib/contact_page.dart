@@ -2,14 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:statemanager/contact_singleton.dart';
 
 class CreateContact extends StatefulWidget {
-  final TextEditingController controllerNewContact;
-  const CreateContact({super.key, required this.controllerNewContact});
+  
+  const CreateContact({super.key});
 
   @override
   State<CreateContact> createState() => _CreateContactState();
 }
 
 class _CreateContactState extends State<CreateContact> {
+  final TextEditingController controllerNewContact = TextEditingController();
+
+  @override
+  void dispose() {
+    controllerNewContact.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,7 +29,7 @@ class _CreateContactState extends State<CreateContact> {
       body: Column(
         children: [
           TextField(
-            controller: widget.controllerNewContact,
+            controller: controllerNewContact,
             decoration: const InputDecoration(
               labelText: 'Name',
             ),
@@ -30,7 +38,7 @@ class _CreateContactState extends State<CreateContact> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          ContactBook().addContact(Contact(name: widget.controllerNewContact.text));
+          ContactBook().addContact(Contact(name: controllerNewContact.text));
           Navigator.pop(context);
         },
         tooltip: 'Create',
