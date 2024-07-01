@@ -41,6 +41,11 @@ class ContacstPage extends StatelessWidget {
         valueListenable: ContactBook(),
         builder: (context, value, child) {
           final List<Contact> actualListContant = value;
+          if (actualListContant.isEmpty) {
+            return const Center(
+              child: Text('No contacts found'),
+            );
+          }
           return ListView.builder(
             itemCount: actualListContant.length,
             itemBuilder: (BuildContext context, int index) {
