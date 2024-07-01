@@ -44,10 +44,25 @@ class ContacstPage extends StatelessWidget {
             itemCount: actualListContant.length,
             itemBuilder: (BuildContext context, int index) {
               final contact = actualListContant[index];
-              return ListTile(
-                title: Text(
-                  contact.name,
-                  style: Theme.of(context).textTheme.bodyMedium,
+              return Dismissible(
+                key: ValueKey(contact.uuid),
+                onDismissed: (direction) {
+                  ContactBook().removeContact(contact);
+                },
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Material(
+                    color: Theme.of(context).colorScheme.surface,
+                    borderOnForeground: true,
+                    borderRadius: BorderRadius.circular(16),
+                    elevation: 6,
+                    child: ListTile(
+                      title: Text(
+                        contact.name,
+                        style: Theme.of(context).textTheme.bodyMedium,
+                      ),
+                    ),
+                  ),
                 ),
               );
             },
