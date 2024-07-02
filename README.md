@@ -6,7 +6,7 @@ Many branches with all types of state management
 
 This project is a starting point for a State Management Flutter application.
 
-You can clone a specific snippet project to avoid mistructure the concepts.
+You can clone a specific snippet project to avoid misstructured the concepts.
 
 -  Singleton + ValueNotifier
 
