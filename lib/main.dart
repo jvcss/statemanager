@@ -1,66 +1,41 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
-import 'package:statemanager/cubit/random_names_cubit.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const App());
 }
 
-class MyApp extends StatelessWidget {
-  final StreamController<String?>? streamController;
-  const MyApp({super.key, this.streamController});
+class App extends StatelessWidget {
+  const App({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Flutter Demo',
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-          useMaterial3: true,
-        ),
-        routes: Map<String, WidgetBuilder>.from({
-          '/': (context) => MyPage(
-                title: 'Flutter Demo Home Page',
-                streamController: streamController,
-              ),
-        }));
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        useMaterial3: true,
+      ),
+      home: const Page(title: 'Flutter Demo Home Page'),
+    );
   }
 }
 
-class MyPage extends StatefulWidget {
-  const MyPage({super.key, required this.title, this.streamController});
+class Page extends StatefulWidget {
+  const Page({super.key, required this.title});
 
   final String title;
-  final StreamController<String?>? streamController;
 
   @override
-  State<MyPage> createState() => MyPageState();
+  State<Page> createState() => PageState();
 }
 
-class MyPageState extends State<MyPage> {
-  late NamesCubit _namesCubit;
+class PageState extends State<Page> {
+  int _counter = 0;
 
-  @override
-  void initState() {
-    super.initState();
-    _namesCubit = NamesCubit();
-  }
-
-  @override
-  void dispose() {
-    _namesCubit.close();
-    super.dispose();
-  }
-
-  Stream<String?> stream() {
-    // check if test
-    if (widget.streamController != null) {
-      widget.streamController!.add(_namesCubit.state);
-      return widget.streamController!.stream;
-    }
-    return _namesCubit.stream;
+  void _incrementCounter() {
+    setState(() {
+      _counter++;
+    });
   }
 
   @override
@@ -70,35 +45,24 @@ class MyPageState extends State<MyPage> {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(widget.title),
       ),
-      body: StreamBuilder<String?>(
-        stream: stream(),
-        builder: (context, snapshot) {
-          switch (snapshot.connectionState) {
-            case ConnectionState.waiting:
-              return const Center(child: CircularProgressIndicator());
-            case ConnectionState.active:
-            case ConnectionState.done:
-              break;
-            case ConnectionState.none:
-              return const Center(child: Text('No data'));
-          }
-
-          return Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                const Text('Random Name'),
-                Text(snapshot.data ?? 'Press the button to generate a name'),
-              ],
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            const Text(
+              'Variable view managed:',
             ),
-          );
-        },
+            Text(
+              '$_counter',
+              style: Theme.of(context).textTheme.headlineMedium,
+            ),
+          ],
+        ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          _namesCubit.generateRandomName();
-        },
-        child: const Icon(Icons.refresh),
+        onPressed: _incrementCounter,
+        tooltip: 'Increment',
+        child: const Icon(Icons.add),
       ),
     );
   }

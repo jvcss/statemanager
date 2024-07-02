@@ -42,31 +42,31 @@ void main() {
   //     print('Error capturing or saving screenshot: $e');
   //   }
   // }
-  testWidgets('Stream of Nullable Strings Test', (WidgetTester tester) async {
-    final cubit = NamesCubit();
-    cubit.generateRandomName();
-    final streamController = StreamController<String?>();
+  // testWidgets('Stream of Nullable Strings Test', (WidgetTester tester) async {
+  //   final cubit = NamesCubit();
+  //   cubit.generateRandomName();
+  //   final streamController = StreamController<String?>();
 
-    final subscription = cubit.stream.listen((name) {
-      streamController.add(name);
-    });
+  //   final subscription = cubit.stream.listen((name) {
+  //     streamController.add(name);
+  //   });
 
-    await tester.pumpWidget(Screenshot(
-      controller: screenshotController,
-      child: MyApp(
-        streamController: streamController,
-      ),
-    ));
+  //   await tester.pumpWidget(Screenshot(
+  //     controller: screenshotController,
+  //     child: MyApp(
+  //       streamController: streamController,
+  //     ),
+  //   ));
 
-    await tester.pumpAndSettle();
-    //await captureScreenshot('stream_initial_state');
+  //   await tester.pumpAndSettle();
+  //   //await captureScreenshot('stream_initial_state');
 
-    // Additional interactions and assertions...
-    // await tester.tap(find.byType(FloatingActionButton));
-    // await tester.pumpAndSettle();
-    // await captureScreenshot('after_fab_tap');
+  //   // Additional interactions and assertions...
+  //   // await tester.tap(find.byType(FloatingActionButton));
+  //   // await tester.pumpAndSettle();
+  //   // await captureScreenshot('after_fab_tap');
 
-    subscription.cancel();
-    streamController.close();
-  });
+  //   subscription.cancel();
+  //   streamController.close();
+  // });
 }
