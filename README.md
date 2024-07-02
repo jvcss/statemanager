@@ -11,3 +11,8 @@ You can clone a specific snippet project to avoid mistructure the concepts.
 -  Singleton + ValueNotifier
 
     - `git clone --depth 1 -b vanilla_state_manager_crud `
+
+
+- Inhented Widget + API + Animation Controller
+
+    - `git clone --depth 1 -b inheritedWidget_state_management`
