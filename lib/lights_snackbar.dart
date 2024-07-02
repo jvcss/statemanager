@@ -63,7 +63,7 @@ class LightsSnackbarContentState extends State<LightsSnackbarContent> with Singl
             child: Container(
               color: inversePrimary.withOpacity(0.2),
               alignment: Alignment.center,
-              child: Text('Bot X trade...',
+              child: Text('...',
                   style: TextStyle(
                     color: Theme.of(context).colorScheme.primary,
                   )),

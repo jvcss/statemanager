@@ -70,18 +70,9 @@ class _HomePageState extends State<HomePage> {
       body: GestureDetector(
         onTap: () {
           showFancySnackbar(context);
-          // ScaffoldMessenger.of(context).showSnackBar(
-          //   SnackBar(
-          //     backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-          //     content: Container(
-          //       decoration: BoxDecoration(
-          //         color: Theme.of(context).colorScheme.primary,
-          //         borderRadius: BorderRadius.circular(10),
-          //       ),
-          //     ),
-          //     duration: const Duration(seconds: 2),
-          //   ),
-          // );
+          setState(() {
+            title = 'Show case';
+          });
         },
         child: Container(
           color: Theme.of(context).colorScheme.background,
