@@ -28,7 +28,7 @@ class PageScreen extends StatelessWidget {
             ),
             BlocBuilder<PersonBloc, FetchResult?>(
               buildWhen: (previousResult, currentResult) {
-                return previousResult?.persons != currentResult?.persons;                
+                return previousResult?.persons != currentResult?.persons;
               },
               builder: (context, state) {
                 return Container();
