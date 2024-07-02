@@ -61,10 +61,8 @@ class MyPageState extends State<MyPage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                const Text(
-                  'Random Name',
-                ),
-                Text(snapshot.data ?? 'Press the button to generate a name')
+                const Text('Random Name'),
+                Text(snapshot.data ?? 'Press the button to generate a name'),
               ],
             ),
           );
