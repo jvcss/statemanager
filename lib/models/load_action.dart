@@ -1,6 +1,4 @@
-import 'package:flutter/material.dart';
-import 'person_url.dart';
-
+import '../imports.dart';
 @immutable
 abstract class LoadAction {
   const LoadAction();

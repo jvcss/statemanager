@@ -1,11 +1,4 @@
-import 'package:flutter/material.dart';
-
-import 'package:bloc/bloc.dart';
-
-import 'package:statemanager/models/fetch_result.dart';
-import 'package:statemanager/models/load_action.dart';
-import 'package:statemanager/models/person_url.dart';
-import 'package:statemanager/services/person_service.dart';
+import '../imports.dart';
 
 class PersonBloc extends Bloc<LoadAction, FetchResult?> {
   final Map<PersonUrl, FetchResult> _cache = {};

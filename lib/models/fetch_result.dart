@@ -1,6 +1,4 @@
-import 'package:flutter/material.dart';
-import 'person.dart';
-
+import '../imports.dart';
 @immutable
 class FetchResult {
   final Iterable<Person> persons;

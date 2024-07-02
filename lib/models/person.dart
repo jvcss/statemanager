@@ -1,5 +1,4 @@
-import 'package:flutter/material.dart';
-
+import '../imports.dart';
 @immutable
 class Person {
   final String name;

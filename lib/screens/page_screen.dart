@@ -1,8 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import '../blocs/person_bloc.dart';
-import '../models/load_action.dart';
-import '../models/person_url.dart';
+import '../imports.dart';
 
 class PageScreen extends StatelessWidget {
   const PageScreen({super.key});
@@ -29,7 +25,15 @@ class PageScreen extends StatelessWidget {
                 final f = context.read<PersonBloc>().add(LoadPersonAction(url: PersonUrl.person2));
               },
               child: const Text('Load json 2'),
-            )
+            ),
+            BlocBuilder<PersonBloc, FetchResult?>(
+              buildWhen: (previousResult, currentResult) {
+                return previousResult?.persons != currentResult?.persons;                
+              },
+              builder: (context, state) {
+                return Container();
+              },
+            ),
           ],
         ),
       ),
