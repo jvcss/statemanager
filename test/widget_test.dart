@@ -15,20 +15,21 @@ void main() {
     // Build our app and trigger a frame.
     await tester.pumpWidget(const MyApp());
 
-    // Verify that the initial screen is an empty list.
+    // Verify that our counter starts at empty message.
     expect(find.text('Press the button to generate a name'), findsOneWidget);
-    expect(find.text(names[0]), findsNothing);
-    // intagindo com a tela
+    expect(find.byElementPredicate(
+      (Element element) => element.widget is Text && names.contains((element.widget as Text).data),
+    ), findsNothing);
+  
+    // check if the constant information is present
     expect(find.text('Random Name'), findsOneWidget);
 
     await tester.tap(find.byIcon(Icons.refresh));
-    await tester.pumpAndSettle(    );
+    await tester.pumpAndSettle();
 
-    expect(find.text('Press the button to generate a name'), findsNothing);
+    expect(find.text('Press the button to generate a name'), findsNothing);// new name is generated
     expect(find.byElementPredicate(
       (Element element) => element.widget is Text && names.contains((element.widget as Text).data),
-    ), findsOneWidget);
-
-    //tester.pumpAndSettle();
+    ), findsOneWidget); // should find the new name in the list
   });
 }
