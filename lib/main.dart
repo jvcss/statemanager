@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:statemanager/lights_snackbar.dart';
 
@@ -71,7 +69,7 @@ class _HomePageState extends State<HomePage> {
         onTap: () {
           showFancySnackbar(context);
           setState(() {
-            title = 'Show case';
+            title = DateTime.now().toLocal().toString();
           });
         },
         child: Container(
