@@ -14,19 +14,20 @@ void main() {
   testWidgets('Random name Test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
     await tester.pumpWidget(const MyApp());
-    
+
     // Verify that the initial screen is an empty list.
     expect(find.text('Press the button to generate a name'), findsOneWidget);
     expect(find.text(names[0]), findsNothing);
     // intagindo com a tela
-    await tester.tap(find.byIcon(Icons.refresh));
     expect(find.text('Random Name'), findsOneWidget);
-    
+
+    await tester.tap(find.byIcon(Icons.refresh));
+    await tester.pumpAndSettle(    );
+
     expect(find.text('Press the button to generate a name'), findsNothing);
-    tester.pump();
-    // expect(find.byElementPredicate(
-    //   (Element element) => element.widget is Text && names.contains((element.widget as Text).data),
-    // ), findsOneWidget);
+    expect(find.byElementPredicate(
+      (Element element) => element.widget is Text && names.contains((element.widget as Text).data),
+    ), findsOneWidget);
 
     //tester.pumpAndSettle();
   });
