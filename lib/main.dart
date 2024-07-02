@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:statemanager/random_names_cubit.dart';
+import 'package:statemanager/cubit/random_names_cubit.dart';
 
 void main() {
   runApp(const MyApp());
