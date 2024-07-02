@@ -99,10 +99,10 @@ class _HomePageState extends State<HomePage> {
   }
 
   void showFancySnackbar(BuildContext context) {
-    final snackBar = SnackBar(
+    const snackBar = SnackBar(
       padding: EdgeInsets.zero,
       clipBehavior: Clip.none,
-      duration: const Duration(seconds: 2),
+      duration: Duration(seconds: 2),
       backgroundColor: Colors.transparent,
       elevation: 0,
       content: LightsSnackbarContent(),
