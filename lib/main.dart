@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:statemanager/lights_snackbar.dart';
 
 void main() {
   runApp(const App());
@@ -45,12 +46,13 @@ class _HomePageState extends State<HomePage> {
   String title = 'Home Page';
 
   void _changeTitle() {
-    Timer.periodic(const Duration(seconds: 1), (timer) {
-      setState(() {
-        title = DateTime.now().toLocal().toString();
-      });
-    });
+    // Timer.periodic(const Duration(seconds: 59), (timer) {
+    //   setState(() {
+    //     title = DateTime.now().toLocal().toString();
+    //   });
+    // });
   }
+
   @override
   void initState() {
     super.initState();
@@ -67,25 +69,27 @@ class _HomePageState extends State<HomePage> {
       ),
       body: GestureDetector(
         onTap: () {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Container(
-                decoration: BoxDecoration(
-                  color: Theme.of(context).colorScheme.primary,
-                  borderRadius: BorderRadius.circular(10),
-                ),
-              ),
-              duration: const Duration(seconds: 2),
-            ),
-          );
+          showFancySnackbar(context);
+          // ScaffoldMessenger.of(context).showSnackBar(
+          //   SnackBar(
+          //     backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+          //     content: Container(
+          //       decoration: BoxDecoration(
+          //         color: Theme.of(context).colorScheme.primary,
+          //         borderRadius: BorderRadius.circular(10),
+          //       ),
+          //     ),
+          //     duration: const Duration(seconds: 2),
+          //   ),
+          // );
         },
         child: Container(
-          color: Theme.of(context).colorScheme.primary,
+          color: Theme.of(context).colorScheme.background,
           child: Center(
             child: Text(
-              'Go to Second Page',
+              'Show case',
               style: TextStyle(
-                color: Theme.of(context).colorScheme.onPrimary,
+                color: Theme.of(context).colorScheme.onBackground,
               ),
             ),
           ),
@@ -93,4 +97,19 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
+
+  void showFancySnackbar(BuildContext context) {
+    final snackBar = SnackBar(
+      padding: EdgeInsets.zero,
+      clipBehavior: Clip.none,
+      duration: const Duration(seconds: 2),
+      backgroundColor: Colors.transparent,
+      elevation: 0,
+      content: LightsSnackbarContent(),
+    );
+
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+  }
+
+  
 }
