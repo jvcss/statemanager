@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(App());
+  runApp(const App());
 }
 
 class App extends StatelessWidget {
-  App({super.key});
-  Color green = const Color.fromRGBO(1, 204, 160, 1);
-  Color backgroundColor = const Color.fromRGBO(26, 31, 36, 1);
+  const App({super.key});
+  final Color green = const Color.fromRGBO(1, 204, 160, 1);
+  final Color backgroundColor = const Color.fromRGBO(26, 31, 36, 1);
 
   @override
   Widget build(BuildContext context) {
@@ -64,7 +64,6 @@ class HomePage extends StatelessWidget {
                 ),
               ),
             ),
-            const Text('This is the Home Page'),
           ],
         ),
       ),
