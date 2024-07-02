@@ -8,31 +8,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:statemanager/main.dart';
+import 'package:statemanager/random_names.dart';
 
 void main() {
-  testWidgets('Add Contact Test', (WidgetTester tester) async {
+  testWidgets('Random name Test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    await tester.pumpWidget( App());
-
+    await tester.pumpWidget(const MyApp());
+    
     // Verify that the initial screen is an empty list.
-    expect(find.text('No contacts found'), findsOneWidget);
-    expect(find.text('something'), findsNothing);
+    expect(find.text('Press the button to generate a name'), findsOneWidget);
+    expect(find.text(names[0]), findsNothing);
+    // intagindo com a tela
+    await tester.tap(find.byIcon(Icons.refresh));
+    expect(find.text('Random Name'), findsOneWidget);
+    
+    expect(find.text('Press the button to generate a name'), findsNothing);
+    tester.pump();
+    // expect(find.byElementPredicate(
+    //   (Element element) => element.widget is Text && names.contains((element.widget as Text).data),
+    // ), findsOneWidget);
 
-    // Tap the '+' icon and open a new page.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pumpAndSettle(); // Aguarda a animação e a navegação completa.
-
-    expect(find.text('Name'), findsOneWidget);
-    expect(find.byTooltip('Create'), findsOneWidget);
-
-    // interact with the new page to fulfil the test contact name
-    await tester.enterText(find.byType(TextField), 'something');
-    await tester.pumpAndSettle();
-    await tester.tap(find.byIcon(Icons.plus_one));
-    await tester.pumpAndSettle();
-
-    // Verify that our counter has incremented.
-    expect(find.text('No contacts found'), findsNothing);
-    expect(find.text('something'), findsOneWidget);
+    //tester.pumpAndSettle();
   });
 }

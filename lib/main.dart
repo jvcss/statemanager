@@ -1,14 +1,12 @@
-import 'dart:math' as math show Random;
 import 'package:flutter/material.dart';
-import 'package:bloc/bloc.dart';
 import 'package:statemanager/random_names.dart';
 
 void main() {
-  runApp(const App());
+  runApp(const MyApp());
 }
 
-class App extends StatelessWidget {
-  const App({super.key});
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -20,21 +18,21 @@ class App extends StatelessWidget {
           useMaterial3: true,
         ),
         routes: Map<String, WidgetBuilder>.from({
-          '/': (context) => const Page(title: 'Flutter Demo Home Page'),
+          '/': (context) => const MyPage(title: 'Flutter Demo Home Page'),
         }));
   }
 }
 
-class Page extends StatefulWidget {
-  const Page({super.key, required this.title});
+class MyPage extends StatefulWidget {
+  const MyPage({super.key, required this.title});
 
   final String title;
 
   @override
-  State<Page> createState() => PageState();
+  State<MyPage> createState() => MyPageState();
 }
 
-class PageState extends State<Page> {
+class MyPageState extends State<MyPage> {
   late NamesCubit _namesCubit;
 
   @override
@@ -63,9 +61,10 @@ class PageState extends State<Page> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Text(
-                  'Random Name: ${snapshot.data ?? 'Press the button to generate a name'}',
-                )
+                const Text(
+                  'Random Name',
+                ),
+                Text(snapshot.data ?? 'Press the button to generate a name')
               ],
             ),
           );
