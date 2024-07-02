@@ -1,5 +1,11 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:statemanager/api.dart';
+import 'package:statemanager/display_dynamic_view.dart';
 import 'package:statemanager/lights_snackbar.dart';
+import 'package:statemanager/provider.dart';
 
 void main() {
   runApp(const App());
@@ -21,8 +27,9 @@ class App extends StatelessWidget {
         useMaterial3: true,
       ),
       routes: <String, WidgetBuilder>{
-        '/': (BuildContext context) => const HomePage(
-            //   title: 'Page',
+        '/': (BuildContext context) => ApiProvider(
+              api: API(),
+              child: const HomePage(),
             ),
       },
     );
@@ -40,21 +47,34 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
-  String title = 'Home Page';
+// poderia ser usado dentro do widget HomePage
+// mas para fins de demonstração, foi colocado aqui
+// para mostrar que o estado do provider é preservado
+void _changeTitle(BuildContext context) async {
+  Timer.periodic(const Duration(seconds: 3), (timer) {
+    //setState(() {
+      //title = DateTime.now().toLocal().toString();
+      final api = ApiProvider.of(context)!;
+      // essa é a chamada que altera o estado do provider, que consequentemente atualiza o widget DisplayDynamicView
+      // e que por consequência atualiza o widget HomePage
+      // nao existe outra chamada além dessa que altera o estado do provider com um metodo
+      // no widget DisplayDynamicView, apenas a referencia da variavel é diretamente atribuida ao widget
+      // isso significa que o compartilhamento de context herdado por StatelessWidget e InheritedWidget do provider
+      // a chamada da api é feita indiretamente e mesmo assim o valor é atualizado
+      // uma boa demonstração de conservação de estado
+      var dateAndTime = api?.api.getDateAndTime();
+      //_textKey = ValueKey<String?>(api!.id);
+    });
+}
 
-  void _changeTitle() {
-    // Timer.periodic(const Duration(seconds: 59), (timer) {
-    //   setState(() {
-    //     title = DateTime.now().toLocal().toString();
-    //   });
-    // });
-  }
+class _HomePageState extends State<HomePage> {
+  //ValueKey _textKey = const ValueKey<String?>(null);
+  String title = 'Home Page';
 
   @override
   void initState() {
     super.initState();
-    _changeTitle();
+    _changeTitle(context);
   }
 
   @override
@@ -63,26 +83,44 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         centerTitle: true,
-        title: Text(title),
+        title: Text(
+          ApiProvider.of(context)?.api.dateAndTime ?? title,
+        ),
       ),
-      body: GestureDetector(
-        onTap: () {
-          showFancySnackbar(context);
-          setState(() {
-            title = DateTime.now().toLocal().toString();
-          });
-        },
-        child: Container(
-          color: Theme.of(context).colorScheme.background,
-          child: Center(
-            child: Text(
-              'Show case',
-              style: TextStyle(
-                color: Theme.of(context).colorScheme.onBackground,
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          DisplayDynamicView(
+              //   key: _textKey,
+              ),
+          GestureDetector(
+            onTap: () async {
+              showFancySnackbar(context);
+              //final api = ApiProvider.of(context);
+              // final dateAndTime = await api?.api.getDateAndTime(); // this is not so good. why?
+              //because you need to reexcute the function to get the value
+              // if its a heavy function, it will be a problem
+              // most important if the business logic runs over a single instance
+              // you can compromise the list of executions.
+
+              setState(() {
+                //title = ApiProvider.of(context)?.api.dateAndTime ?? 'Loading.';
+                //_textKey = ValueKey<String?>(dateAndTime);
+              });
+            },
+            child: Container(
+              color: Theme.of(context).colorScheme.onBackground,
+              child: Center(
+                child: Text(
+                  'Show case',
+                  style: TextStyle(
+                    color: Theme.of(context).colorScheme.background,
+                  ),
+                ),
               ),
             ),
           ),
-        ),
+        ],
       ),
     );
   }
@@ -99,6 +137,4 @@ class _HomePageState extends State<HomePage> {
 
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
-
-  
 }
