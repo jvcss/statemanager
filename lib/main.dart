@@ -1,4 +1,7 @@
+import 'dart:math' as math show Random;
 import 'package:flutter/material.dart';
+import 'package:bloc/bloc.dart';
+import 'package:statemanager/random_names.dart';
 
 void main() {
   runApp(const App());
@@ -6,20 +9,19 @@ void main() {
 
 class App extends StatelessWidget {
   const App({super.key});
-  
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      theme: ThemeData(        
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      routes: Map<String, WidgetBuilder>.from({
-        '/': (context) => const Page(title: 'Flutter Demo Home Page'),
-      })
-    );
+        debugShowCheckedModeBanner: false,
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+          useMaterial3: true,
+        ),
+        routes: Map<String, WidgetBuilder>.from({
+          '/': (context) => const Page(title: 'Flutter Demo Home Page'),
+        }));
   }
 }
 
@@ -33,12 +35,18 @@ class Page extends StatefulWidget {
 }
 
 class PageState extends State<Page> {
-  int _counter = 0;
-  
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
+  late NamesCubit _namesCubit;
+
+  @override
+  void initState() {
+    super.initState();
+    _namesCubit = NamesCubit();
+  }
+
+  @override
+  void dispose() {
+    _namesCubit.close();
+    super.dispose();
   }
 
   @override
@@ -48,25 +56,27 @@ class PageState extends State<Page> {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(widget.title),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'Variable view managed:',
+      body: StreamBuilder<String?>(
+        stream: _namesCubit.stream,
+        builder: (context, snapshot) {
+          return Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  'Random Name: ${snapshot.data ?? 'Press the button to generate a name'}',
+                )
+              ],
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
-        ),
+          );
+        },
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), 
+        onPressed: () {
+          _namesCubit.generateRandomName();
+        },
+        child: const Icon(Icons.refresh),
+      ),
     );
   }
 }
