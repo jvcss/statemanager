@@ -8,7 +8,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:statemanager/main.dart';
-import 'package:statemanager/random_names.dart';
+import 'package:statemanager/random_names_cubit.dart';
 
 void main() {
   testWidgets('Random name Test', (WidgetTester tester) async {

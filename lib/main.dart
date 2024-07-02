@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:statemanager/random_names.dart';
+import 'package:statemanager/random_names_cubit.dart';
 
 void main() {
   runApp(const MyApp());
