@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:statemanager/random_names_cubit.dart';
 
@@ -6,7 +8,8 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final StreamController<String?>? streamController;
+  const MyApp({super.key, this.streamController});
 
   @override
   Widget build(BuildContext context) {
@@ -18,15 +21,19 @@ class MyApp extends StatelessWidget {
           useMaterial3: true,
         ),
         routes: Map<String, WidgetBuilder>.from({
-          '/': (context) => const MyPage(title: 'Flutter Demo Home Page'),
+          '/': (context) => MyPage(
+                title: 'Flutter Demo Home Page',
+                streamController: streamController,
+              ),
         }));
   }
 }
 
 class MyPage extends StatefulWidget {
-  const MyPage({super.key, required this.title});
+  const MyPage({super.key, required this.title, this.streamController});
 
   final String title;
+  final StreamController<String?>? streamController;
 
   @override
   State<MyPage> createState() => MyPageState();
@@ -47,6 +54,15 @@ class MyPageState extends State<MyPage> {
     super.dispose();
   }
 
+  Stream<String?> stream() {
+    // check if test
+    if (widget.streamController != null) {
+      widget.streamController!.add(_namesCubit.state);
+      return widget.streamController!.stream;
+    }
+    return _namesCubit.stream;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,8 +71,18 @@ class MyPageState extends State<MyPage> {
         title: Text(widget.title),
       ),
       body: StreamBuilder<String?>(
-        stream: _namesCubit.stream,
+        stream: stream(),
         builder: (context, snapshot) {
+          switch (snapshot.connectionState) {
+            case ConnectionState.waiting:
+              return const Center(child: CircularProgressIndicator());
+            case ConnectionState.active:
+            case ConnectionState.done:
+              break;
+            case ConnectionState.none:
+              return const Center(child: Text('No data'));
+          }
+
           return Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
