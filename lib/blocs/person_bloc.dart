@@ -20,11 +20,13 @@ class PersonBloc extends Bloc<LoadAction, FetchResult?> {
     } else {
       final persons = await getPersons(url.url);
       _cache[url] = persons as FetchResult;
-      final result = FetchResult(
+
+      final results = FetchResult(
         persons: persons,
         isRetrievedFromCache: false,
       );
-      emit(result);
+      
+      emit(results);
     }
   }
 }

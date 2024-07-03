@@ -5,8 +5,7 @@ abstract class LoadAction {
 }
 
 @immutable
-class LoadPersonAction extends LoadAction {
-  const LoadPersonAction({required this.url}) : super();
-
+class LoadPersonAction implements LoadAction {
   final PersonUrl url;
+  const LoadPersonAction({required this.url}) : super();
 }

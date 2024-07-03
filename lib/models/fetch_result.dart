@@ -10,6 +10,6 @@ class FetchResult {
 
   @override
   String toString() {
-    return 'FetchResult{persons: $persons, isRetrievedFromCache: $isRetrievedFromCache}';
+    return 'FetchResult ( isRetrievedFromCache: $isRetrievedFromCache, persons: $persons )';
   }
 }

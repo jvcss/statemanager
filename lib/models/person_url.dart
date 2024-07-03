@@ -7,9 +7,9 @@ extension UrlString on PersonUrl {
   String get url {
     switch (this) {
       case PersonUrl.person1:
-        return 'https://jsonplaceholder.typicode.com/users/1';
+        return 'http://10.0.2.2:5500/api/persons1.json';
       case PersonUrl.person2:
-        return 'https://jsonplaceholder.typicode.com/users/2';
+        return 'http://10.0.2.2:5500/api/persons2.json';//https://jsonplaceholder.typicode.com/users/2
     }
   }
 }

@@ -1,4 +1,5 @@
 import '../imports.dart';
+
 @immutable
 class Person {
   final String name;
@@ -8,7 +9,5 @@ class Person {
     required this.age,
   });
 
-  Person.fromJson(Map<String, dynamic> json)
-      : name = json['name'] as String,
-        age = json['age'] as int;
+  Person.fromJson(Map<String, dynamic> json) : name = json['name'] as String, age = json['age'] as int;
 }

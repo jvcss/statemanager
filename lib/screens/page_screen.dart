@@ -16,13 +16,13 @@ class PageScreen extends StatelessWidget {
           children: <Widget>[
             TextButton(
               onPressed: () {
-                final f = context.read<PersonBloc>().add(LoadPersonAction(url: PersonUrl.person1));
+                context.read<PersonBloc>().add(const LoadPersonAction(url: PersonUrl.person1));
               },
               child: const Text('Load json 1'),
             ),
             TextButton(
               onPressed: () {
-                final f = context.read<PersonBloc>().add(LoadPersonAction(url: PersonUrl.person2));
+                context.read<PersonBloc>().add(const LoadPersonAction(url: PersonUrl.person2));
               },
               child: const Text('Load json 2'),
             ),
@@ -37,25 +37,18 @@ class PageScreen extends StatelessWidget {
                 }
                 return Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: Theme.of(context).colorScheme.primary,
-                      ),
-                    ),
-                    child: Expanded(
-                      child: ListView.builder(
-                        itemCount: persons.length,
-                        itemBuilder: (context, index) {
-                          // ! using extension subscription on iterable
-                          final person = persons[index]!;
-                          return ListTile(
-                            title: Text(
-                              person.name,
-                            ),
-                          );
-                        },
-                      ),
+                  child: Expanded(
+                    child: ListView.builder(
+                      itemCount: persons.length,
+                      itemBuilder: (context, index) {
+                        // ! using extension subscription on iterable
+                        final person = persons[index]?.name;
+                        return ListTile(
+                          title: Text(
+                            person??'NO NAME',
+                          ),
+                        );
+                      },
                     ),
                   ),
                 );
