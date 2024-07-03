@@ -3,12 +3,13 @@ import '../imports.dart';
 class PersonBloc extends Bloc<LoadAction, FetchResult?> {
   final Map<PersonUrl, FetchResult> _cache = {};
   PersonBloc() : super(null) {
+// without external link ^ but share through bloc
     on<LoadPersonAction>((event, emit) async {
-      _loadPerson(event, emit);
+      await _loadPerson(event, emit);
     });
   }
 
-  void _loadPerson(LoadPersonAction event, Emitter<FetchResult?> emit) async {
+  Future<void> _loadPerson(LoadPersonAction event, Emitter<FetchResult?> emit) async {
     final url = event.url;
     if (_cache.containsKey(url)) {
       final cachedPersons = _cache[url]!;
@@ -16,17 +17,19 @@ class PersonBloc extends Bloc<LoadAction, FetchResult?> {
         isRetrievedFromCache: true,
         persons: cachedPersons.persons,
       );
-      emit(result);
+      if (!emit.isDone) {
+        emit(result);
+      }
     } else {
       final persons = await getPersons(url.url);
-      _cache[url] = persons as FetchResult;
-
-      final results = FetchResult(
+      final fetchResult = FetchResult(
         persons: persons,
         isRetrievedFromCache: false,
       );
-      
-      emit(results);
+      _cache[url] = fetchResult;
+      if (!emit.isDone) {
+        emit(fetchResult);
+      }
     }
   }
 }

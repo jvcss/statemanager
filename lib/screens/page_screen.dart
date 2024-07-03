@@ -6,6 +6,7 @@ class PageScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: const Text('title'),
@@ -33,23 +34,21 @@ class PageScreen extends StatelessWidget {
               builder: (context, fatchResult) {
                 var persons = fatchResult?.persons;
                 if (persons == null) {
-                  return const SizedBox();
+                  return const Placeholder();
                 }
-                return Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Expanded(
-                    child: ListView.builder(
-                      itemCount: persons.length,
-                      itemBuilder: (context, index) {
-                        // ! using extension subscription on iterable
-                        final person = persons[index]?.name;
-                        return ListTile(
-                          title: Text(
-                            person??'NO NAME',
-                          ),
-                        );
-                      },
-                    ),
+                return Expanded(
+                  child: ListView.builder(
+                    itemCount: persons.length,
+                    itemBuilder: (context, index) {
+                      // ! using extension subscription on iterable
+                      final person = persons[index]?.name;
+                      return ListTile(
+                        title: Text(
+                          person! ,
+                          style: const TextStyle(color: Colors.black),
+                        ),
+                      );
+                    },
                   ),
                 );
 
