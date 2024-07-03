@@ -22,16 +22,17 @@ class PersonBloc extends Bloc<LoadAction, FetchResult?> {
       if (!emit.isDone) {
         emit(result);
       }
-    }
-    final loader = event.loader;
-    final persons = await loader(url);
-    final fetchResult = FetchResult(
-      persons: persons,
-      isRetrievedFromCache: false,
-    );
-    _cache[url] = fetchResult;
-    if (!emit.isDone) {
-      emit(fetchResult);
+    } else {
+      final loader = event.loader;
+      final persons = await loader(url);
+      final fetchResult = FetchResult(
+        persons: persons,
+        isRetrievedFromCache: false,
+      );
+      _cache[url] = fetchResult;
+      if (!emit.isDone) {
+        emit(fetchResult);
+      }
     }
     //}
   }

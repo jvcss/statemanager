@@ -8,13 +8,13 @@ import 'package:statemanager/models/person.dart';
 const mockPerson1 = [
   Person(age: 1, name: 'John'),
   Person(age: 2, name: 'Doe'),
-  Person(name: 'Dani', age: 28),
+  Person(age: 28, name: 'Dani'),
 ];
 
 const mockPerson2 = [
   Person(age: 1, name: 'John'),
   Person(age: 2, name: 'Doe'),
-  Person(name: 'Dani', age: 28),
+  Person(age: 28, name: 'Dani'),
 ];
 
 Future<Iterable<Person>> mockGetPersons1(String _) async => Future.value(mockPerson1);
@@ -35,15 +35,41 @@ void main() {
     );
 
     blocTest<PersonBloc, FetchResult?>(
-      'mock retrieving ',
+      'mock retrieving 1',
       build: () => personBloc,
       act: (bloc) {
-        bloc.add(LoadPersonAction(
-          url: 'url1',
+        bloc.add(const LoadPersonAction(
+          url: 'dummy',
+          loader: mockGetPersons1,
+        ));
+        bloc.add(const LoadPersonAction(
+          url: 'dummy',
           loader: mockGetPersons1,
         ));
       },
-      expect: () => [const FetchResult(persons: mockPerson1, isRetrievedFromCache: false)],
+      expect: () => [
+        const FetchResult(persons: mockPerson1, isRetrievedFromCache: false),
+        const FetchResult(persons: mockPerson1, isRetrievedFromCache: true),
+      ],
+    );
+
+    blocTest<PersonBloc, FetchResult?>(
+      'mock retrieving 2',
+      build: () => personBloc,
+      act: (bloc) {
+        bloc.add(const LoadPersonAction(
+          url: 'dummy2',
+          loader: mockGetPersons2,
+        ));
+        bloc.add(const LoadPersonAction(
+          url: 'dummy2',
+          loader: mockGetPersons2,
+        ));
+      },
+      expect: () => [
+        const FetchResult(persons: mockPerson2, isRetrievedFromCache: false),
+        const FetchResult(persons: mockPerson2, isRetrievedFromCache: true),
+      ],
     );
   });
 }
