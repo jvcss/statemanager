@@ -1,7 +1,6 @@
 import 'dart:async' show Timer;
 
 import 'package:flutter/material.dart';
-import 'package:bloc/bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:statemanager/blocs/bloc_model/fetch_result.dart';
 import 'package:statemanager/blocs/bloc_model/load_action.dart';

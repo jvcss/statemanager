@@ -13,5 +13,5 @@ extension Log on Object {
   void log() => debugPrint(toString());
 }
 
-const String person2 = "https://jsonplaceholder.typicode.com/users/1";
-const String person1 = "https://jsonplaceholder.typicode.com/users/1";
+const String person2 = 'https://jsonplaceholder.typicode.com/users/1';
+const String person1 = 'https://jsonplaceholder.typicode.com/users/1';

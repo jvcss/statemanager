@@ -1,11 +1,8 @@
-import 'dart:async';
+
 import 'dart:io';
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:statemanager/imports.dart';
 import 'package:path/path.dart' as path;
 import 'package:statemanager/main.dart';
-import 'package:statemanager/cubit/random_names_cubit.dart';
 import 'package:screenshot/screenshot.dart';
 
 void main() {
