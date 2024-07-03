@@ -1,7 +1,15 @@
+import 'dart:async';
+
 import '../imports.dart';
 
 class PageScreen extends StatelessWidget {
   const PageScreen({super.key});
+
+  void timer(BuildContext context) {
+    Timer.periodic(const Duration(seconds: 5), (timer) {
+      context.read<PersonBloc>().add(const LoadPersonAction(url: PersonUrl.person1));
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +48,6 @@ class PageScreen extends StatelessWidget {
                   child: ListView.builder(
                     itemCount: persons.length,
                     itemBuilder: (context, index) {
-                      // ! using extension subscription on iterable
                       final person = persons[index]?.name;
                       return ListTile(
                         title: Text(
@@ -51,15 +58,15 @@ class PageScreen extends StatelessWidget {
                     },
                   ),
                 );
-
-                return Container();
               },
             ),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => {},
+        onPressed: () => {
+          timer(context),
+        },
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ),
