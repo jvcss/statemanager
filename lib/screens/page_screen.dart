@@ -30,7 +30,21 @@ class PageScreen extends StatelessWidget {
               buildWhen: (previousResult, currentResult) {
                 return previousResult?.persons != currentResult?.persons;
               },
-              builder: (context, state) {
+              builder: (context, fatchResult) {
+                var persons = fatchResult?.persons;
+                if (persons == null) {
+                  return const SizedBox();
+                }
+                return Expanded(
+                  child: ListView.builder(
+                    itemCount: persons.length,
+                    itemBuilder: (context, index) {
+                      // ! using extension subscription on iterable
+                      final person = persons[index];
+                    },
+                  ),
+                );
+
                 return Container();
               },
             ),
