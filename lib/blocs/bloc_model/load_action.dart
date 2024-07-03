@@ -1,9 +1,8 @@
-
 import 'package:flutter/foundation.dart';
 import 'package:statemanager/blocs/bloc_type/person_loader_type.dart';
 //
 
-// It 
+// It
 @immutable
 abstract class LoadAction {
   const LoadAction();
