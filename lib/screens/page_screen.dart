@@ -1,13 +1,20 @@
-import 'dart:async';
+import 'dart:async' show Timer;
 
-import '../imports.dart';
+import 'package:flutter/material.dart';
+import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:statemanager/blocs/bloc_model/fetch_result.dart';
+import 'package:statemanager/blocs/bloc_model/load_action.dart';
+import 'package:statemanager/blocs/person_bloc.dart';
+import 'package:statemanager/services/person_service.dart';
+import 'package:statemanager/utils/extensions.dart';
 
 class PageScreen extends StatelessWidget {
   const PageScreen({super.key});
 
   void timer(BuildContext context) {
     Timer.periodic(const Duration(seconds: 5), (timer) {
-      context.read<PersonBloc>().add(const LoadPersonAction(url: PersonUrl.person1));
+      context.read<PersonBloc>().add(const LoadPersonAction(url: person1, loader: getPersons));
     });
   }
 
@@ -25,13 +32,13 @@ class PageScreen extends StatelessWidget {
           children: <Widget>[
             TextButton(
               onPressed: () {
-                context.read<PersonBloc>().add(const LoadPersonAction(url: PersonUrl.person1));
+                context.read<PersonBloc>().add(const LoadPersonAction(url: person1, loader: getPersons));
               },
               child: const Text('Load json 1'),
             ),
             TextButton(
               onPressed: () {
-                context.read<PersonBloc>().add(const LoadPersonAction(url: PersonUrl.person2));
+                context.read<PersonBloc>().add(const LoadPersonAction(url: person2, loader: getPersons));
               },
               child: const Text('Load json 2'),
             ),
@@ -51,7 +58,7 @@ class PageScreen extends StatelessWidget {
                       final person = persons[index]?.name;
                       return ListTile(
                         title: Text(
-                          person! ,
+                          person!,
                           style: const TextStyle(color: Colors.black),
                         ),
                       );

@@ -1,4 +1,4 @@
-import '../imports.dart';
+import 'package:flutter/foundation.dart';
 
 @immutable
 class Person {
@@ -10,4 +10,8 @@ class Person {
   });
 
   Person.fromJson(Map<String, dynamic> json) : name = json['name'] as String, age = json['age'] as int;
+
+  @override
+  String toString() => 'Person(name: $name, age: $age)';
 }
+

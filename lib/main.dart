@@ -1,4 +1,8 @@
-import 'imports.dart';
+import 'package:flutter/material.dart';
+import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:statemanager/blocs/person_bloc.dart';
+import 'package:statemanager/screens/page_screen.dart';
 
 void main() {
   runApp(const App());

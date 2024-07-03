@@ -1,7 +1,9 @@
-import '../imports.dart';
+import 'package:bloc/bloc.dart';
+import 'package:statemanager/blocs/bloc_model/fetch_result.dart';
+import 'package:statemanager/blocs/bloc_model/load_action.dart';
 
 class PersonBloc extends Bloc<LoadAction, FetchResult?> {
-  final Map<PersonUrl, FetchResult> _cache = {};
+  final Map<String, FetchResult> _cache = {};
   PersonBloc() : super(null) {
 // without external link ^ but share through bloc
     on<LoadPersonAction>((event, emit) async {
@@ -14,14 +16,15 @@ class PersonBloc extends Bloc<LoadAction, FetchResult?> {
     if (_cache.containsKey(url)) {
       final cachedPersons = _cache[url]!;
       final result = FetchResult(
-        isRetrievedFromCache: true,
         persons: cachedPersons.persons,
+        isRetrievedFromCache: true,
       );
       if (!emit.isDone) {
         emit(result);
       }
     }
-    final persons = await getPersons(url.url);
+    final loader = event.loader;
+    final persons = await loader(url);
     final fetchResult = FetchResult(
       persons: persons,
       isRetrievedFromCache: false,
