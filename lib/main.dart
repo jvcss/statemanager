@@ -1,6 +1,12 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
+import 'package:statemanager/pages/home.dart';
+import 'package:statemanager/util/couters.dart';
+import 'package:statemanager/util/extensions.dart';
 
 void main() {
+  colors.random();
   runApp(const App());
 }
 
@@ -16,17 +22,8 @@ class App extends StatelessWidget {
         useMaterial3: true,
       ),
       routes: {
-        '/': (context) => const Page(),
+        '/': (context) => const HomePage(),
       },
     );
-  }
-}
-
-class Page extends StatelessWidget {
-  const Page({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Placeholder();
   }
 }
