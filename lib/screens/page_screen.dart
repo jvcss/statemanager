@@ -35,13 +35,28 @@ class PageScreen extends StatelessWidget {
                 if (persons == null) {
                   return const SizedBox();
                 }
-                return Expanded(
-                  child: ListView.builder(
-                    itemCount: persons.length,
-                    itemBuilder: (context, index) {
-                      // ! using extension subscription on iterable
-                      final person = persons[index];
-                    },
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
+                    ),
+                    child: Expanded(
+                      child: ListView.builder(
+                        itemCount: persons.length,
+                        itemBuilder: (context, index) {
+                          // ! using extension subscription on iterable
+                          final person = persons[index]!;
+                          return ListTile(
+                            title: Text(
+                              person.name,
+                            ),
+                          );
+                        },
+                      ),
+                    ),
                   ),
                 );
 
