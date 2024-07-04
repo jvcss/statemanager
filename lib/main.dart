@@ -1,6 +1,6 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:statemanager/home_screen.dart';
 
 void main() {
   runApp(const App());
@@ -18,7 +18,7 @@ class App extends StatelessWidget {
         useMaterial3: true,
       ),
       routes: {
-        '/': (context) => const Placeholder(),
+        '/': (context) => const HomePage(),
       },
     );
   }
