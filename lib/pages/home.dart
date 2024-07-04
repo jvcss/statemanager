@@ -32,12 +32,10 @@ class HomePageState extends State<HomePage> {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   const ColorWidget(
-                    availableColor1: EnumColor.one,
-                    availableColor2: EnumColor.two,
+                    colorWidget: EnumColor.one,
                   ),
                   const ColorWidget(
-                    availableColor1: EnumColor.two,
-                    availableColor2: EnumColor.one,
+                    colorWidget: EnumColor.two,
                   ),
                   ElevatedButton(
                     onPressed: () {
