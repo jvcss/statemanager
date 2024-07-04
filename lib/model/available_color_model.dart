@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:statemanager/util/couters.dart';
+import 'package:statemanager/util/countables.dart';
+import 'dart:developer' as developer show log;
 
-class AvailableColorsWidget extends InheritedModel<AvailableColors> {
+class AvailableColorsWidget extends InheritedModel<EnumColor> {
   const AvailableColorsWidget({
     super.key,
     required super.child,
-    required this.availableColors,
+    required this.availableColors1,
     required this.availableColors2,
   });
 
-  final AvailableColors availableColors;
-  final AvailableColors availableColors2;
+  final MaterialColor availableColors1;
+  final MaterialColor availableColors2;
 
-  static AvailableColorsWidget of(BuildContext context, AvailableColors aspect) {
+  static AvailableColorsWidget of(BuildContext context, EnumColor aspect) {
     return InheritedModel.inheritFrom<AvailableColorsWidget>(
       context,
       aspect: aspect,
@@ -20,15 +21,19 @@ class AvailableColorsWidget extends InheritedModel<AvailableColors> {
   }
 
   @override
-  bool updateShouldNotify(AvailableColorsWidget oldWidget) {
-    return availableColors != oldWidget.availableColors;
+  bool updateShouldNotify(covariant AvailableColorsWidget oldWidget) {
+    // só atualiza se as cores disponíveis mudarem
+    // only update if the available colors change
+    developer.log('updateShouldNotify');
+    return availableColors1 != oldWidget.availableColors1 || availableColors2 != oldWidget.availableColors2;
   }
 
   @override
   bool updateShouldNotifyDependent(
-    AvailableColorsWidget oldWidget,
-    Set<AvailableColors> dependencies,
+    covariant AvailableColorsWidget oldWidget,
+    Set<EnumColor> dependencies,
   ) {
-    return dependencies.contains(AvailableColors.one) && availableColors != oldWidget.availableColors;
+    developer.log('updateShouldNotifyDependent $dependencies');
+    return dependencies.contains(EnumColor.one) && availableColors1 != oldWidget.availableColors1;
   }
 }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-enum AvailableColors { one, two }
+enum EnumColor { one, two }
 
 final colors = [
   Colors.red,
