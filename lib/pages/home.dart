@@ -31,10 +31,10 @@ class HomePageState extends State<HomePage> {
               Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  const ColorWidget(
+                  ColorWidget(
                     colorWidget: EnumColor.one,
                   ),
-                  const ColorWidget(
+                  ColorWidget(
                     colorWidget: EnumColor.two,
                   ),
                   ElevatedButton(

@@ -16,6 +16,9 @@ class ColorWidget extends StatelessWidget {
         developer.log('ColorWidget: availableColor1 EnumColor.two');
     }
     final provider = AvailableColorsWidget.of(context, colorWidget);
+    // if the widget I'm passing as argument is the First or the Second one.
+    // in case positive we should use the provider color specific for this implicitly selected
+    // widget.
     return Container(
       width: 100,
       height: 100,
