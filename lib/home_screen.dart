@@ -13,7 +13,7 @@ class HomePage extends HookWidget {
         text.value = controller.text;
       });
       return () => controller.dispose();
-    }, []);
+    }, [controller]);
 
     return Scaffold(
       appBar: AppBar(
