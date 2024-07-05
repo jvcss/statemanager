@@ -3,8 +3,10 @@ import 'dart:math';
 
 import 'package:flutter/foundation.dart' show immutable;
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:statemanager/api/login_api.dart';
-import 'package:statemanager/api/notes_api.dart';
+
+import 'package:statemanager/api/login/login_interface.dart';
+import 'package:statemanager/api/note/notes_api_interface.dart';
+
 import 'package:statemanager/model/login_model.dart';
 import 'package:statemanager/model/note_model.dart';
 
@@ -41,7 +43,7 @@ class AppBloc extends Bloc<AppEvent, AppState> {
     );
   }
 
-  FutureOr<void> _onNotes(LoadNotesEvent event, Emitter<AppState> emit) {
+  FutureOr<void> _onNotes(LoadNotesEvent event, Emitter<AppState> emit) async {
     emit(
       state.copyWith(
         loginModel: state.loginModel,
@@ -62,6 +64,14 @@ class AppBloc extends Bloc<AppEvent, AppState> {
       );
       return null;
     }
-    final notes = notesApi.fetchNotes(loginModel: loginModel!);
+    final notes = await notesApi.fetchNotes(loginModel: loginModel!);
+    emit(
+      state.copyWith(
+        isLoading: false,
+        loginError: null,
+        loginModel: loginModel,
+        notes: notes,
+      ),
+    );
   }
 }

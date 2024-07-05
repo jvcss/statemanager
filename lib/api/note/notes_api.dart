@@ -1,15 +1,4 @@
-import 'package:flutter/foundation.dart' show immutable;
-import 'package:statemanager/model/login_model.dart';
-import 'package:statemanager/model/note_model.dart';
-
-@immutable
-abstract class NotesApiProtocol {
-  const NotesApiProtocol();
-
-  Future<Iterable<Note>?> fetchNotes({
-    required LoginModel loginModel,
-  });
-}
+part of 'notes_api_interface.dart';
 
 @immutable
 class NotesApi implements NotesApiProtocol {

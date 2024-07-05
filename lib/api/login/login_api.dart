@@ -1,15 +1,4 @@
-import 'package:flutter/foundation.dart' show immutable;
-import 'package:statemanager/model/login_model.dart';
-
-@immutable
-abstract class LoginApiProtocol {
-  const LoginApiProtocol();
-
-  Future<LoginModel?> login({
-    required String username,
-    required String password,
-  });
-}
+part of 'login_interface.dart';
 
 @immutable
 class LoginApi implements LoginApiProtocol {
