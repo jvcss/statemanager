@@ -2,17 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:statemanager/helper/strings.dart' show enterYourPasswordDialogTitle, passwordText;
 
 class PasswordTextField extends StatelessWidget {
-  final TextEditingController passwordController;
+  final TextEditingController controller;
 
   const PasswordTextField({
     super.key,
-    required this.passwordController,
+    required this.controller,
   });
 
   @override
   Widget build(BuildContext context) {
     return TextField(
-      controller: passwordController,
+      controller: controller,
       keyboardType: TextInputType.visiblePassword,
       obscureText: true,
       autocorrect: false,

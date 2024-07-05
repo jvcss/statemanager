@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'dart:developer' as devtools show log;
 
 import 'package:statemanager/widget/email_textfield.dart';
@@ -15,6 +16,7 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
@@ -32,30 +34,51 @@ class Page extends StatelessWidget {
     var emailController = TextEditingController();
     var passwordController = TextEditingController();
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: const Text('Home Page'),
-        centerTitle: true,
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
-            const Text(
-              'Welcome to Flutter',
+        body: CustomScrollView(
+      slivers: [
+        SliverAppBar(
+          expandedHeight: 300.0,
+          pinned: true,
+          flexibleSpace: FlexibleSpaceBar(
+            title: const Text('Welcome to Flutter'),
+            background: Image.network(
+              'https://firebasestorage.googleapis.com/v0/b/cripto-safe.appspot.com/o/MODO_SANIN_AI_GEMINI_CRYPTO_SAFE.jpg?alt=media&token=a4564b90-1e9d-43e4-bb07-85c3501f69f5',
+              fit: BoxFit.cover,
             ),
-            EmailTextField(emailController: emailController),
-            PasswordTextField(passwordController: passwordController),
-            ElevatedButton(
-              onPressed: () {
-                devtools.log('Email: ${emailController.text}');
-                devtools.log('Password: ${passwordController.text}');
-              },
-              child: const Text('Log in'),
-            )
-          ],
+          ),
+          floating: true,
+          snap: true,
         ),
-      ),
-    );
+        SliverList(
+          delegate: SliverChildListDelegate([
+            Padding(
+              padding: const EdgeInsets.only(
+                left: 14.0,
+                top: 14.0,
+                right: 14.0,
+                bottom: 0.0,
+              ),
+              child: EmailTextField(
+                controller: emailController,
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(14.0),
+              child: PasswordTextField(controller: passwordController),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(14.0),
+              child: ElevatedButton(
+                onPressed: () {
+                  devtools.log('Email: ${emailController.text}');
+                  devtools.log('Password: ${passwordController.text}');
+                },
+                child: const Text('Login'),
+              ),
+            ),
+          ]),
+        ),
+      ],
+    ));
   }
 }

@@ -2,17 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:statemanager/helper/strings.dart' show emailText, enterYourEmailDialogTitle;
 
 class EmailTextField extends StatelessWidget {
-  final TextEditingController emailController;
+  final TextEditingController controller;
 
   const EmailTextField({
     super.key,
-    required this.emailController,
+    required this.controller,
   });
 
   @override
   Widget build(BuildContext context) {
     return  TextField(
-      controller: emailController,
+      controller: controller,
       keyboardType: TextInputType.emailAddress,
       autocorrect: false,
       decoration: const InputDecoration(
