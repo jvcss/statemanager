@@ -1,6 +1,6 @@
-import 'package:flutter/foundation.dart';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:statemanager/helper/strings.dart' show cryptosafelogo, logo;
 import 'dart:developer' as devtools show log;
 
@@ -36,14 +36,14 @@ class Page extends StatelessWidget {
     var emailController = TextEditingController();
     var passwordController = TextEditingController();
     // Determine if we are running in a test environment
-    bool isTestEnvironment = PlatformDispatcher.instance.defaultRouteName == '/test';
+    bool isTestEnvironment = Platform.environment.containsKey('FLUTTER_TEST');
 
     return Scaffold(
         body: CustomScrollView(
       slivers: [
         SliverAppBar(
           expandedHeight: 300.0,
-          pinned: true,
+          pinned: false,
           flexibleSpace: FlexibleSpaceBar(
             title: const Text('Welcome to Flutter'),
             background: isTestEnvironment
