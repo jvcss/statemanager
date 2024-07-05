@@ -5,6 +5,7 @@ import 'package:statemanager/helper/strings.dart' show cryptosafelogo, logo;
 import 'dart:developer' as devtools show log;
 
 import 'package:statemanager/widget/email_textfield.dart';
+import 'package:statemanager/widget/login_button.dart';
 import 'package:statemanager/widget/password_textfield.dart';
 
 void main() {
@@ -42,10 +43,17 @@ class Page extends StatelessWidget {
         body: CustomScrollView(
       slivers: [
         SliverAppBar(
-          expandedHeight: 300.0,
+          expandedHeight: 500.0,
           pinned: false,
           flexibleSpace: FlexibleSpaceBar(
-            title: const Text('Welcome to Flutter'),
+            title: const Text(
+              'Welcome to Flutter',
+              locale: Locale('en', 'US'),
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 24.0,
+              ),
+            ),
             background: isTestEnvironment
                 ? logo
                 : Image.network(
@@ -75,13 +83,22 @@ class Page extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.all(14.0),
-              child: ElevatedButton(
-                onPressed: () {
-                  devtools.log('Email: ${emailController.text}');
-                  devtools.log('Password: ${passwordController.text}');
+              child: LoginButton(
+                onLoginTapped: (e, s) {
+                  devtools.log('Email: $e');
+                  devtools.log('Password: $s');
+                  return e == s;
                 },
-                child: const Text('Login'),
+                emailField: emailController,
+                passwordField: passwordController,
               ),
+              //   ElevatedButton(
+              //   onPressed: () {
+              //     devtools.log('Email: ${emailController.text}');
+              //     devtools.log('Password: ${passwordController.text}');
+              //   },
+              //   child: const Text('Login'),
+              // ),
             ),
           ]),
         ),
