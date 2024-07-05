@@ -16,6 +16,10 @@ const ok = 'OK';
 
 const cancel = 'Cancel';
 
+const passwordText = 'Password';
+
+const emailText = 'Email';
+
 const login = 'Log in';
 
 const homePage = 'Home Page';
