@@ -1,12 +1,12 @@
+part of 'app_bloc.dart';
 
-import 'package:flutter/foundation.dart' show immutable;
-
-@immutable 
+@immutable
 abstract class AppEvent {
   const AppEvent();
 }
 
-@immutable class LoginEvent implements AppEvent {
+@immutable
+class LoginEvent implements AppEvent {
   const LoginEvent({
     required this.username,
     required this.password,
@@ -16,10 +16,12 @@ abstract class AppEvent {
   final String password;
 }
 
-@immutable class LoadNotesAction implements AppEvent {
-  const LoadNotesAction();
+@immutable
+class LoadNotesEvent implements AppEvent {
+  const LoadNotesEvent();
 }
 
-@immutable class LogoutAction implements AppEvent {
-  const LogoutAction();
+@immutable
+class LogoutEvent implements AppEvent {
+  const LogoutEvent();
 }

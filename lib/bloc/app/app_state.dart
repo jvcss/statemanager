@@ -1,6 +1,4 @@
-import 'package:flutter/foundation.dart' show immutable;
-
-import 'package:statemanager/model/login_model.dart';
+part of 'app_bloc.dart';
 
 @immutable
 class AppState {
@@ -29,4 +27,20 @@ class AppState {
         'notes': notes,
         'loginModel': loginModel,
       }.toString();
+  
+  // * all the parameters are required,
+  // * so we can use the copyWith method to create a new instance of AppState
+  AppState copyWith({
+    required bool isLoading,
+    LoginErrors? loginError,
+    Iterable<Note>? notes,
+    LoginModel? loginModel,
+  }) {
+    return AppState(
+      isLoading: isLoading,
+      loginError: loginError ?? this.loginError, // * null-aware operator, if loginError is null, use this.loginError
+      notes: notes ?? this.notes,
+      loginModel: loginModel ?? this.loginModel,
+    );
+  }
 }
