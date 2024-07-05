@@ -1,5 +1,7 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:statemanager/helper/strings.dart' show cryptosafelogo, logo;
 import 'dart:developer' as devtools show log;
 
 import 'package:statemanager/widget/email_textfield.dart';
@@ -33,6 +35,9 @@ class Page extends StatelessWidget {
   Widget build(BuildContext context) {
     var emailController = TextEditingController();
     var passwordController = TextEditingController();
+    // Determine if we are running in a test environment
+    bool isTestEnvironment = PlatformDispatcher.instance.defaultRouteName == '/test';
+
     return Scaffold(
         body: CustomScrollView(
       slivers: [
@@ -41,10 +46,12 @@ class Page extends StatelessWidget {
           pinned: true,
           flexibleSpace: FlexibleSpaceBar(
             title: const Text('Welcome to Flutter'),
-            background: Image.network(
-              'https://firebasestorage.googleapis.com/v0/b/cripto-safe.appspot.com/o/MODO_SANIN_AI_GEMINI_CRYPTO_SAFE.jpg?alt=media&token=a4564b90-1e9d-43e4-bb07-85c3501f69f5',
-              fit: BoxFit.cover,
-            ),
+            background: isTestEnvironment
+                ? logo
+                : Image.network(
+                    cryptosafelogo,
+                    fit: BoxFit.cover,
+                  ),
           ),
           floating: true,
           snap: true,

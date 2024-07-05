@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 const emailOrPasswordEmptyDialogTitle = 'Email or password is empty';
 
 const emailOrPasswordEmptyDialogMessage =
@@ -23,3 +25,7 @@ const emailText = 'Email';
 const login = 'Log in';
 
 const homePage = 'Home Page';
+
+const logo = FlutterLogo();
+
+const cryptosafelogo = 'https://firebasestorage.googleapis.com/v0/b/cripto-safe.appspot.com/o/MODO_SANIN_AI_GEMINI_CRYPTO_SAFE.jpg?alt=media&token=a4564b90-1e9d-43e4-bb07-85c3501f69f5' ;
