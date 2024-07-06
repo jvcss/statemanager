@@ -52,7 +52,7 @@ class AppBloc extends Bloc<AppEvent, AppState> {
     );
 
     final loginModel = state.loginModel;
-    if (loginModel != const LoginModel.fooBar()) {
+    if (loginModel != const LoginModel.adminAccount()) {
       emit(
         state.copyWith(
           isLoading: false,

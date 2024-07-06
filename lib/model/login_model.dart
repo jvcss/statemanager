@@ -8,7 +8,7 @@ class LoginModel {
     required this.token,
   });
 
-  const LoginModel.fooBar() : token = 'foobar';
+  const LoginModel.adminAccount() : token = 'adminToken';
 
   @override
   bool operator ==(covariant LoginModel other) => token == other.token;

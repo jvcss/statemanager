@@ -15,6 +15,6 @@ class LoginApi implements LoginApiProtocol {
         const Duration(seconds: 2),
         () => username == 'admin' && password == 'admin',
       ).then(
-        (isLoggedIn) => isLoggedIn ? const LoginModel.fooBar() : null,
+        (isLoggedIn) => isLoggedIn ? const LoginModel.adminAccount() : null,
       );
 }

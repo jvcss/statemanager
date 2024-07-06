@@ -33,7 +33,7 @@ class App extends StatelessWidget {
                 notesApi: NotesApi(),
               );
             },
-            child: true ? const LoginPageVanilla(): const LoginPage(),
+            child: false ? const LoginPageVanilla(): const LoginPage(),
           );
         },
       },

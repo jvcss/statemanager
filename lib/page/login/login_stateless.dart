@@ -47,7 +47,7 @@ class LoginPageVanilla extends StatelessWidget {
               options: () => {ok: true},
             );
           }
-          if (state.isLoading == false && state.loginError == null && state.loginModel == const LoginModel.fooBar() && state.notes == null) {
+          if (state.isLoading == false && state.loginError == null && state.loginModel == const LoginModel.adminAccount() && state.notes == null) {
             context.read<AppBloc>().add(
                   const LoadNotesEvent(),
                 );
