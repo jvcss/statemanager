@@ -8,7 +8,7 @@ import 'package:statemanager/helper/strings.dart';
 import 'package:statemanager/model/login_model.dart';
 import 'package:statemanager/page/loading/load_screen.dart';
 import 'package:statemanager/page/login/login_hook.dart';
-import 'package:statemanager/widget/list_screen.dart';
+import 'package:statemanager/widget/extensions/list_screen.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});

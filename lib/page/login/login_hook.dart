@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:statemanager/widget/email_textfield.dart';
-import 'package:statemanager/widget/login_button.dart';
+import 'package:statemanager/widget/extensions/login_button.dart';
 import 'package:statemanager/widget/password_textfield.dart';
 
 class LoginView extends HookWidget {

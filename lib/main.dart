@@ -15,9 +15,9 @@ import 'package:statemanager/page/login/login_page.dart';
 import 'package:statemanager/page/login/login_stateless.dart';
 
 import 'package:statemanager/widget/email_textfield.dart';
-import 'package:statemanager/widget/login_button.dart';
+import 'package:statemanager/widget/extensions/login_button.dart';
 import 'package:statemanager/widget/password_textfield.dart';
-import 'package:statemanager/widget/list_screen.dart';
+import 'package:statemanager/widget/extensions/list_screen.dart';
 
 void main() {
   runApp(const App());

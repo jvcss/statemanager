@@ -8,8 +8,8 @@ import 'package:statemanager/helper/strings.dart';
 import 'package:statemanager/model/login_model.dart';
 import 'package:statemanager/page/loading/load_screen.dart';
 import 'package:statemanager/widget/email_textfield.dart';
-import 'package:statemanager/widget/list_screen.dart';
-import 'package:statemanager/widget/login_button.dart';
+import 'package:statemanager/widget/extensions/list_screen.dart';
+import 'package:statemanager/widget/extensions/login_button.dart';
 import 'package:statemanager/widget/password_textfield.dart';
 import 'dart:developer' as devtools show log;
 
