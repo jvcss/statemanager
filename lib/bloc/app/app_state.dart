@@ -27,7 +27,7 @@ class AppState {
         'notes': notes,
         'loginModel': loginModel,
       }.toString();
-  
+
   // * all the parameters are required,
   // * so we can use the copyWith method to create a new instance of AppState
   AppState copyWith({
@@ -42,5 +42,31 @@ class AppState {
       notes: notes ?? this.notes,
       loginModel: loginModel ?? this.loginModel,
     );
+  }
+
+  @override
+  bool operator ==(covariant AppState other) {
+    final otherProps = isLoading.isEqualTo(other.isLoading) &&
+     loginError == other.loginError &&
+      loginModel == other.loginModel;
+    if (notes == null && other.notes == null) {
+      return otherProps;
+    } else {
+      return otherProps && (notes!.isEqualTo(other.notes));
+    }
+  }
+
+  @override
+  int get hashCode => Object.hash(
+        isLoading,
+        loginError,
+        notes,
+        loginModel,
+      );
+}
+
+extension UnorderedEquality on Object {
+  bool isEqualTo(other) {
+    return const DeepCollectionEquality.unordered().equals(this, other);
   }
 }
