@@ -34,7 +34,7 @@ class AppBloc extends Bloc<AppEvent, AppState> {
     //start loading
     emit(
       state.copyWith(
-        isLoading: true,
+        isLoading: false,
         loginError: loginModel == null ? LoginErrors.invalidModel : null,
         loginModel: loginModel,
         // all null values stay the same
