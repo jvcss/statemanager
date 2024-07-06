@@ -10,7 +10,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:statemanager/api/login/login_interface.dart';
 import 'package:statemanager/api/note/notes_api_interface.dart';
 import 'package:statemanager/bloc/app/app_bloc.dart';
-import 'package:statemanager/main.dart';
 import 'package:statemanager/model/login_model.dart';
 import 'package:statemanager/model/note_model.dart';
 
