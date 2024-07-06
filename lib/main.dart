@@ -7,13 +7,16 @@ import 'package:statemanager/bloc/app/app_bloc.dart';
 import 'package:statemanager/page/login/login_page.dart';
 import 'package:statemanager/page/login/login_stateless.dart';
 
-
 void main() {
   runApp(const App());
 }
 
 class App extends StatelessWidget {
-  const App({super.key});
+  final bool showSliver;
+  const App({
+    super.key,
+    this.showSliver = false,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +36,7 @@ class App extends StatelessWidget {
                 notesApi: NotesApi(),
               );
             },
-            child: true ? const LoginPageVanilla(): const LoginPage(),
+            child: showSliver ? const LoginPageVanilla() : const LoginPage(),
           );
         },
       },
