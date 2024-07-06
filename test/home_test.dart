@@ -1,6 +1,4 @@
 
-import 'package:flutter/material.dart';
-import 'package:statemanager/helper/strings.dart' show login;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:statemanager/main.dart';
 import 'package:statemanager/widget/email_textfield.dart';

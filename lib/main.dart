@@ -16,7 +16,7 @@ class App extends StatelessWidget {
   final bool showSliver;
   const App({
     super.key,
-    this.showSliver = false,
+    this.showSliver = true,
   });
 
   @override
