@@ -7,11 +7,11 @@ class Note {
   const Note({required this.title});
 
   @override
-  String toString() => 'Note{title: $title}';
+  String toString() => 'Note(title: $title)';
 }
 
 final mockNotes = Iterable.generate(
-  3,
+  9,
   (i) => Note(
     title: 'Note ${i + 1}',
   ),
