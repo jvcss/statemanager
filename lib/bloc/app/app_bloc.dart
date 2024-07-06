@@ -17,10 +17,12 @@ part 'app_state.dart';
 class AppBloc extends Bloc<AppEvent, AppState> {
   final LoginApiProtocol loginApi;
   final NotesApiProtocol notesApi;
+  final LoginModel acceptableLoginModel;
 
   AppBloc({
     required this.loginApi,
     required this.notesApi,
+    required this.acceptableLoginModel,
   }) : super(
           const AppState.initialState(),
         ) {
@@ -29,6 +31,14 @@ class AppBloc extends Bloc<AppEvent, AppState> {
   }
 
   FutureOr<void> _onLogin(LoginEvent event, Emitter<AppState> emit) async {
+    emit(
+      state.copyWith(
+        isLoading: true,
+        loginError: null,
+        loginModel: null,
+        notes: null,
+      ),
+    );
     final loginModel = await loginApi.login(
       username: event.username,
       password: event.password,
@@ -45,16 +55,17 @@ class AppBloc extends Bloc<AppEvent, AppState> {
   }
 
   FutureOr<void> _onNotes(LoadNotesEvent event, Emitter<AppState> emit) async {
+    // Initing notes
     emit(
       state.copyWith(
         loginModel: state.loginModel,
         isLoading: true,
-        notes: [],
+        notes: null,
       ),
     );
 
     final loginModel = state.loginModel;
-    if (loginModel != const LoginModel.adminAccount()) {
+    if (loginModel != acceptableLoginModel) {
       emit(
         state.copyWith(
           isLoading: false,

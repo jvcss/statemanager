@@ -63,14 +63,65 @@ class MockLoginApi implements LoginApiProtocol {
 
 void main() {
   blocTest<AppBloc, AppState>(
-    'description',
+    'can we open the app and see the login screen',
     build: () => AppBloc(
+      acceptableLoginModel: const LoginModel.adminAccount(),
       loginApi: const MockLoginApi.mockLoginState(),
       notesApi: const MockNotesApi.mockNoteState(),
     ),
-    verify: (bloc) => expect(
-      bloc.state,
-      const AppState.initialState(),
+    verify: (bloc) {
+      // The initial state should be the AppState.initialState()
+      expect(
+        bloc.state,
+        const AppState.initialState(),
+      );
+    },
+  );
+
+  blocTest<AppBloc, AppState>(
+    'can we log in with the correct credentials',
+    build: () => AppBloc(
+      acceptableLoginModel: const LoginModel.adminAccount(),
+      loginApi: MockLoginApi(acceptableEmail: 'admin', acceptablePassword: 'admin', acceptableLoginModel: const LoginModel.adminAccount(), loginSuccess: true),
+      notesApi: const MockNotesApi.mockNoteState(),
     ),
+    act: (bloc) => bloc.add(const LoginEvent(username: 'admin', password: 'admin')),
+    expect: () => [
+      const AppState(isLoading: true, loginError: null, notes: null, loginModel: null),
+      const AppState(isLoading: false, loginError: null, notes: null, loginModel: LoginModel.adminAccount()),
+    ],
+  );
+
+  blocTest<AppBloc, AppState>(
+    'can we not log in with the correct credentials',
+    build: () => AppBloc(
+      acceptableLoginModel: const LoginModel.adminAccount(),
+      loginApi: MockLoginApi(acceptableEmail: 'admin', acceptablePassword: 'admin1', acceptableLoginModel: const LoginModel.adminAccount(), loginSuccess: true),
+      notesApi: const MockNotesApi.mockNoteState(),
+    ),
+    act: (bloc) => bloc.add(const LoginEvent(username: 'admin', password: 'admin')),
+    expect: () => [
+      const AppState(isLoading: true, loginError: null, notes: null, loginModel: null),
+      const AppState(isLoading: false, loginError: LoginErrors.invalidModel, notes: null, loginModel: null),
+    ],
+  );
+
+  blocTest<AppBloc, AppState>(
+    'loading notes with the correct credentials',
+    build: () => AppBloc(
+      acceptableLoginModel: const LoginModel.adminAccount(),
+      loginApi: MockLoginApi(acceptableEmail: 'admin', acceptablePassword: 'admin', acceptableLoginModel: const LoginModel.adminAccount(), loginSuccess: true),
+      notesApi: MockNotesApi(acceptableLoginModel: const LoginModel.adminAccount(), notesToReturnForAcceptableLoginModel: mockNotes),
+    ),
+    act: (bloc) {
+      bloc.add(const LoginEvent(username: 'admin', password: 'admin'));
+      bloc.add(const LoadNotesEvent());
+    },
+    expect: () => [
+      const AppState(isLoading: true, loginError: null, notes: null, loginModel: null),
+      const AppState(isLoading: false, loginError: null, notes: null, loginModel: LoginModel.adminAccount()),
+      const AppState(isLoading: true, loginError: null, notes: null, loginModel: LoginModel.adminAccount()),
+      AppState(isLoading: false, loginError: null, notes: mockNotes, loginModel: const LoginModel.adminAccount()),
+    ],
   );
 }

@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:statemanager/api/login/login_interface.dart';
 import 'package:statemanager/api/note/notes_api_interface.dart';
 import 'package:statemanager/bloc/app/app_bloc.dart';
+import 'package:statemanager/model/login_model.dart';
 import 'package:statemanager/page/login/login_page.dart';
 import 'package:statemanager/page/login/login_stateless.dart';
 
@@ -34,6 +35,7 @@ class App extends StatelessWidget {
               return AppBloc(
                 loginApi: LoginApi(),
                 notesApi: NotesApi(),
+                acceptableLoginModel: const LoginModel.adminAccount(),
               );
             },
             child: showSliver ? const LoginPageVanilla() : const LoginPage(),
