@@ -17,7 +17,7 @@ class LoginModel {
   int get hashCode => token.hashCode;
 
   @override
-  String toString() => 'LoginHandle(token: $token)';
+  String toString() => 'LoginModel(token: $token)';
 }
 
 enum LoginErrors {

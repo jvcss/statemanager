@@ -18,6 +18,7 @@ Future<T?> showGenericDialog<T>({
         actions: dialogOptions.entries.map((entry) {
           return TextButton(
             onPressed: () => 
+            // ignore: unnecessary_null_comparison
             entry != null ? Navigator.of(context).pop(entry.value) : Navigator.of(context).pop() ,
             child: Text(entry.key),
           );

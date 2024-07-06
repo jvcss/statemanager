@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:statemanager/dialogs/generic_dialogs.dart';
-import 'package:statemanager/helper/strings.dart' show emailOrPasswordEmptyDialogMessage,
- emailOrPasswordEmptyDialogTitle,
-  login,
-   ok;
+import 'package:statemanager/helper/strings.dart' show emailOrPasswordEmptyDialogMessage, emailOrPasswordEmptyDialogTitle, login, ok;
 
 typedef OnLoginTapped = bool Function(
   String email,
