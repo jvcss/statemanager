@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:statemanager/bloc/app/app_bloc.dart';
@@ -41,10 +39,7 @@ class LoginPage extends StatelessWidget {
             );
           }
 
-          if (state.isLoading == false && 
-              state.loginError == null && 
-              state.loginModel == const LoginModel.adminAccount() && 
-              state.notes == null) {
+          if (state.isLoading == false && state.loginError == null && state.loginModel == const LoginModel.adminAccount() && state.notes == null) {
             context.read<AppBloc>().add(
                   const LoadNotesEvent(),
                 );
@@ -57,10 +52,12 @@ class LoginPage extends StatelessWidget {
           }
           return LoginView(
             onLoginTapped: (email, password) {
-              context.read<AppBloc>().add(LoginEvent(
-                    username: email,
-                    password: password,
-                  ));
+              context.read<AppBloc>().add(
+                    LoginEvent(
+                      username: email,
+                      password: password,
+                    ),
+                  );
               return state.isLoading;
             },
           );

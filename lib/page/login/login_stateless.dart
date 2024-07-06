@@ -27,99 +27,100 @@ class LoginPageVanilla extends StatelessWidget {
 
     return Scaffold(
         body: BlocConsumer<AppBloc, AppState>(
-        listener: 
-        (context, state) {
-          // take care of loading screen
-          if (state.isLoading) {
-            LoadingScreen().show(
-              context: context,
-              text: 'Logging in...',
-            );
-          } else {
-            LoadingScreen().hide();
-          }
-          final loginError = state.loginError;
-          if (loginError != null) {
-            showGenericDialog(
-              context: context,
-              title: loginErrorDialogTitle,
-              content: loginErrorDialogMessage,
-              options: () => {ok: true},
-            );
-          }
-          if (state.isLoading == false && state.loginError == null && state.loginModel == const LoginModel.adminAccount() && state.notes == null) {
-            context.read<AppBloc>().add(
-                  const LoadNotesEvent(),
-                );
-          }
-        },
-        builder: (context, state) {
-          final notes = state.notes;
-          if (notes != null) {
-            return notes.toListScreen();
-          }
-          return CustomScrollView(
-            slivers: [
-              SliverAppBar(
-                expandedHeight: 500.0,
-                pinned: false,
-                flexibleSpace: FlexibleSpaceBar(
-                  title: const Text(
-                    'Welcome to Flutter',
-                    locale: Locale('en', 'US'),
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 24.0,
-                    ),
+      listener: (context, state) {
+        // take care of loading screen
+        if (state.isLoading) {
+          LoadingScreen().show(
+            context: context,
+            text: 'Logging in...',
+          );
+        } else {
+          LoadingScreen().hide();
+        }
+        final loginError = state.loginError;
+        if (loginError != null) {
+          showGenericDialog<bool>(
+            context: context,
+            title: loginErrorDialogTitle,
+            content: loginErrorDialogMessage,
+            options: () => {ok: true},
+          );
+        }
+        if (state.isLoading == false && state.loginError == null && state.loginModel == const LoginModel.adminAccount() && state.notes == null) {
+          context.read<AppBloc>().add(
+                const LoadNotesEvent(),
+              );
+        }
+      },
+      builder: (context, state) {
+        final notes = state.notes;
+        if (notes != null) {
+          return notes.toListScreen();
+        }
+        return CustomScrollView(
+          slivers: [
+            SliverAppBar(
+              expandedHeight: 500.0,
+              pinned: false,
+              flexibleSpace: FlexibleSpaceBar(
+                title: const Text(
+                  'Welcome to Flutter',
+                  locale: Locale('en', 'US'),
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 24.0,
                   ),
-                  background: isTestEnvironment
-                      ? logo
-                      : Image.network(
-                          cryptosafelogo,
-                          fit: BoxFit.cover,
-                        ),
                 ),
-                floating: true,
-                snap: true,
+                background: isTestEnvironment
+                    ? logo
+                    : Image.network(
+                        cryptosafelogo,
+                        fit: BoxFit.cover,
+                      ),
               ),
-              SliverList(
-                delegate: SliverChildListDelegate([
-                  Padding(
-                    padding: const EdgeInsets.only(
-                      left: 14.0,
-                      top: 14.0,
-                      right: 14.0,
-                      bottom: 0.0,
-                    ),
-                    child: EmailTextField(
-                      controller: emailController,
-                    ),
+              floating: true,
+              snap: true,
+            ),
+            SliverList(
+              delegate: SliverChildListDelegate([
+                Padding(
+                  padding: const EdgeInsets.only(
+                    left: 14.0,
+                    top: 14.0,
+                    right: 14.0,
+                    bottom: 0.0,
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(14.0),
-                    child: PasswordTextField(controller: passwordController),
+                  child: EmailTextField(
+                    controller: emailController,
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(14.0),
-                    child: LoginButton(
-                      onLoginTapped: (email, password) {
-                        devtools.log('Email: $email');
-                        devtools.log('Password: $password');
-                        context.read<AppBloc>().add(LoginEvent(
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(14.0),
+                  child: PasswordTextField(controller: passwordController),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(14.0),
+                  child: LoginButton(
+                    onLoginTapped: (email, password) {
+                      devtools.log('Email: $email');
+                      devtools.log('Password: $password');
+                      context.read<AppBloc>().add(
+                            LoginEvent(
                               username: email,
                               password: password,
-                            ));
-                        return state.isLoading;
-                      },
-                      emailField: emailController,
-                      passwordField: passwordController,
-                    ),
+                            ),
+                          );
+                      return state.isLoading;
+                    },
+                    emailField: emailController,
+                    passwordField: passwordController,
                   ),
-                ]),
-              ),
-            ],
-          );
-        },
+                ),
+              ]),
+            ),
+          ],
+        );
+      },
     ));
   }
 }
