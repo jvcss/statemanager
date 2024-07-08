@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:flutter/foundation.dart' show immutable;
+import 'package:statemanager/extensions/start_with.dart';
 
 @immutable
 class AppState {
@@ -37,8 +38,11 @@ class AppState {
   }
 
   @override
-  bool operator ==(Object other) => identical(this, other) || other is AppState && runtimeType == other.runtimeType && isLoading == other.isLoading;
+  bool operator ==(covariant AppState other) =>
+   isLoading == other.isLoading && 
+   (data ?? []).isEqualTo(other.data ?? []) &&
+    error == other.error;
 
   @override
-  int get hashCode => isLoading.hashCode;
+  int get hashCode => Object.hash(isLoading, data, error);
 }
