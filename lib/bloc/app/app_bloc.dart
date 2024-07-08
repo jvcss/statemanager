@@ -57,6 +57,9 @@ class AppBloc extends Bloc<AppEvent, AppState> {
     );
   }
 
+  // if you want to use the `urlPicker` fro the constructor
+  // you can't isolate the call for the on<LoadNextUrlEvent> method
+  // so this is a literal limitation of the architecture
   FutureOr<void> _onLoadNextUrl(
     LoadNextUrlEvent event,
     Emitter<AppState> emit,
