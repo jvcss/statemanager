@@ -53,3 +53,5 @@ windows/
 macos/
 web/
 pubspec.lock
+firebase.json
+lib/firebase_options.dart
