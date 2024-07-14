@@ -35,7 +35,8 @@ abstract class AuthError {
   factory AuthError.from(FirebaseAuthException exception) => authErrorMapping[exception.code.toLowerCase().trim()] ?? const AuthErrorUnknown();
 }
 
-/// Represents an unknown authentication error.
+/// * Represents an unknown authentication error.
+
 @immutable
 class AuthErrorUnknown extends AuthError {
   const AuthErrorUnknown()
@@ -45,7 +46,8 @@ class AuthErrorUnknown extends AuthError {
         );
 }
 
-/// Represents an error when no current user is signed in.
+/// * Represents an error when no current user is signed in.
+
 @immutable
 class AuthErrorNoCurrentUser extends AuthError {
   const AuthErrorNoCurrentUser()
@@ -55,7 +57,8 @@ class AuthErrorNoCurrentUser extends AuthError {
         );
 }
 
-/// Represents an error that requires recent login.
+/// * Represents an error that requires recent login.
+
 @immutable
 class AuthErrorRequiresRecentLogin extends AuthError {
   const AuthErrorRequiresRecentLogin()
@@ -65,7 +68,8 @@ class AuthErrorRequiresRecentLogin extends AuthError {
         );
 }
 
-/// Represents an error when the operation is not allowed.
+/// * Represents an error when the operation is not allowed.
+
 @immutable
 class AuthErrorOperationNotAllowed extends AuthError {
   const AuthErrorOperationNotAllowed()
@@ -75,7 +79,8 @@ class AuthErrorOperationNotAllowed extends AuthError {
         );
 }
 
-/// Represents an error when the user is not found.
+/// * Represents an error when the user is not found.
+
 @immutable
 class AuthErrorUserNotFound extends AuthError {
   const AuthErrorUserNotFound()
@@ -85,7 +90,8 @@ class AuthErrorUserNotFound extends AuthError {
         );
 }
 
-/// Represents an error when the password is weak.
+/// * Represents an error when the password is weak.
+
 @immutable
 class AuthErrorWeakPassword extends AuthError {
   const AuthErrorWeakPassword()
@@ -95,7 +101,8 @@ class AuthErrorWeakPassword extends AuthError {
         );
 }
 
-/// Represents an error when the email is invalid.
+/// * Represents an error when the email is invalid.
+
 @immutable
 class AuthErrorInvalidEmail extends AuthError {
   const AuthErrorInvalidEmail()
@@ -105,7 +112,8 @@ class AuthErrorInvalidEmail extends AuthError {
         );
 }
 
-/// Represents an error when the Firebase app is deleted.
+/// * Represents an error when the Firebase app is deleted.
+
 @immutable
 class AuthErrorAppDeleted extends AuthError {
   const AuthErrorAppDeleted()
@@ -115,7 +123,8 @@ class AuthErrorAppDeleted extends AuthError {
         );
 }
 
-/// Represents an error when the app is not authorized.
+/// * Represents an error when the app is not authorized.
+
 @immutable
 class AuthErrorAppNotAuthorized extends AuthError {
   const AuthErrorAppNotAuthorized()
@@ -125,7 +134,8 @@ class AuthErrorAppNotAuthorized extends AuthError {
         );
 }
 
-/// Represents an error when an incorrect argument is passed.
+/// * Represents an error when an incorrect argument is passed.
+
 @immutable
 class AuthErrorArgumentError extends AuthError {
   const AuthErrorArgumentError()
@@ -135,7 +145,8 @@ class AuthErrorArgumentError extends AuthError {
         );
 }
 
-/// Represents an error when the provided API key is invalid.
+/// * Represents an error when the provided API key is invalid.
+
 @immutable
 class AuthErrorInvalidApiKey extends AuthError {
   const AuthErrorInvalidApiKey()
@@ -145,7 +156,8 @@ class AuthErrorInvalidApiKey extends AuthError {
         );
 }
 
-/// Represents an error when the user token is invalid.
+/// * Represents an error when the user token is invalid.
+
 @immutable
 class AuthErrorInvalidUserToken extends AuthError {
   const AuthErrorInvalidUserToken()
@@ -155,7 +167,8 @@ class AuthErrorInvalidUserToken extends AuthError {
         );
 }
 
-/// Represents an error when the tenant ID is invalid.
+/// * Represents an error when the tenant ID is invalid.
+
 @immutable
 class AuthErrorInvalidTenantId extends AuthError {
   const AuthErrorInvalidTenantId()
@@ -165,7 +178,8 @@ class AuthErrorInvalidTenantId extends AuthError {
         );
 }
 
-/// Represents an error when a network request fails.
+/// * Represents an error when a network request fails.
+
 @immutable
 class AuthErrorNetworkRequestFailed extends AuthError {
   const AuthErrorNetworkRequestFailed()
@@ -175,7 +189,8 @@ class AuthErrorNetworkRequestFailed extends AuthError {
         );
 }
 
-/// Represents an error when there are too many requests.
+/// * Represents an error when there are too many requests.
+
 @immutable
 class AuthErrorTooManyRequests extends AuthError {
   const AuthErrorTooManyRequests()
@@ -185,7 +200,8 @@ class AuthErrorTooManyRequests extends AuthError {
         );
 }
 
-/// Represents an error when the domain is unauthorized.
+/// * Represents an error when the domain is unauthorized.
+
 @immutable
 class AuthErrorUnauthorizedDomain extends AuthError {
   const AuthErrorUnauthorizedDomain()
@@ -195,7 +211,8 @@ class AuthErrorUnauthorizedDomain extends AuthError {
         );
 }
 
-/// Represents an error when the user account is disabled.
+/// * Represents an error when the user account is disabled.
+
 @immutable
 class AuthErrorUserDisabled extends AuthError {
   const AuthErrorUserDisabled()
@@ -205,7 +222,8 @@ class AuthErrorUserDisabled extends AuthError {
         );
 }
 
-/// Represents an error when the user token has expired.
+/// * Represents an error when the user token has expired.
+
 @immutable
 class AuthErrorUserTokenExpired extends AuthError {
   const AuthErrorUserTokenExpired()
@@ -215,7 +233,8 @@ class AuthErrorUserTokenExpired extends AuthError {
         );
 }
 
-/// Represents an error when web storage is unsupported.
+/// * Represents an error when web storage is unsupported.
+
 @immutable
 class AuthErrorWebStorageUnsupported extends AuthError {
   const AuthErrorWebStorageUnsupported()

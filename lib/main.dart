@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:statemanager/page/login/login_page.dart';
 
 import 'firebase_options.dart';
 
@@ -24,7 +25,10 @@ class App extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const Page(title: 'Flutter Demo Home Page'),
+      routes: <String, WidgetBuilder>{
+        '/': (BuildContext context) => const LoginView(),
+        '/page': (BuildContext context) => const Page(title: 'Page'),
+      }
     );
   }
 }
@@ -42,6 +46,7 @@ class PageState extends State<Page> {
   int _counter = 0;
 
   void _incrementCounter() {
+    
     setState(() {
       _counter++;
     });
