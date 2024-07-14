@@ -8,8 +8,8 @@ Future<void> showDialogAuthError({
 }) {
   return showDialogGeneric<void>(
     context: context,
-    title: 'Authentication Error',
-    content: 'An error occurred while trying to authenticate you. Please try again.',
+    title: 'Authentication Error ${authError.dialogTitle}',
+    content: authError.dialogText,
     options: () => {
       'Ok': false,
     },

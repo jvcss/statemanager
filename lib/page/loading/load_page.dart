@@ -5,11 +5,8 @@ import 'package:statemanager/page/loading/loading_screen_controller.dart';
 
 class LoadingPage {
   LoadingPage._singleton();
-  static LoadingPage? _instance;
-  factory LoadingPage() {
-    _instance ??= LoadingPage._singleton();
-    return _instance!;
-  }
+  static final LoadingPage _instance = LoadingPage._singleton();
+  factory LoadingPage() => _instance;
 
   LoadingScreenController? _controller;
 
@@ -19,13 +16,12 @@ class LoadingPage {
   }) {
     if (_controller?.update(text) ?? false) {
       return;
-    }
-    else {
+    } else {
       _controller = _showOverlay(context: context, text: text);
     }
   }
 
-  void hide(){
+  void hide() {
     _controller?.close();
     _controller = null;
   }
