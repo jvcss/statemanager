@@ -3,11 +3,11 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:statemanager/page/loading/loading_screen_controller.dart';
 
-class LoadingScreen {
-  LoadingScreen._singleton();
-  static LoadingScreen? _instance;
-  factory LoadingScreen() {
-    _instance ??= LoadingScreen._singleton();
+class LoadingPage {
+  LoadingPage._singleton();
+  static LoadingPage? _instance;
+  factory LoadingPage() {
+    _instance ??= LoadingPage._singleton();
     return _instance!;
   }
 

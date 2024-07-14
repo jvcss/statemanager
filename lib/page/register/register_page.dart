@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart' show HookWidget, useTextEditingController;
@@ -25,7 +26,7 @@ class LoginPage extends HookWidget {
             expandedHeight: 300.0,
             flexibleSpace: FlexibleSpaceBar(
               background: Image.asset(
-                'assets/images/logo.jpg',
+                'assets/images/logo_bird_2.jpg',
                 fit: BoxFit.cover,
               ),
             ),
@@ -59,18 +60,18 @@ class LoginPage extends HookWidget {
                           final password = passwordController.text;
                           developer.log('Email: $email, Password: $password');
 
-                          context.read<AppBloc>().add(AppEventLogin(email: email, password: password));
+                          context.read<AppBloc>().add(AppEventRegister(email: email, password: password));
                         },
-                        child: const Text('Log in'),
+                        child: const Text('Register'),
                       ),
                       const SizedBox(height: 16),
                       TextButton(
                         onPressed: () {
                           context.read<AppBloc>().add(
-                                const AppEventGoToRegistration(),
+                                const AppEventGoToLogin(),
                               );
                         },
-                        child: const Text('Create account'),
+                        child: const Text('Back to Login'),
                       ),
                     ],
                   ),
