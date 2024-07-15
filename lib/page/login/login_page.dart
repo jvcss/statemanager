@@ -21,7 +21,7 @@ class LoginPage extends HookWidget {
 
     void scrollToFocusedInput(BuildContext context, FocusNode focusNode) {
       // Delay to ensure keyboard is already shown
-      Future.delayed(const Duration(milliseconds: 700), () {
+      Future.delayed(const Duration(seconds: 1), () {
         final RenderObject? object = focusNode.context?.findRenderObject();
         if (object != null) {
           scrollController.position.ensureVisible(
