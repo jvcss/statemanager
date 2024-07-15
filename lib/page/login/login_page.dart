@@ -81,9 +81,8 @@ class LoginPage extends HookWidget {
                         onPressed: () {
                           final email = emailController.text;
                           final password = passwordController.text;
-                          developer.log('Email: $email, Password: $password');
-
                           context.read<AppBloc>().add(AppEventLogin(email: email, password: password));
+                          developer.log('Email: $email, Password: $password');
                         },
                         child: const Text('Log in'),
                       ),

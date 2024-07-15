@@ -20,10 +20,14 @@ You can clone a specific snippet project to avoid misstructured the concepts.
 - Bloc Manager
     - `git clone --depth 1 -b bloc_management`
 
-- How to implement synchronous stream?
-```dart
-final _text = StreamController<String>();
-// A controller with a [stream] that supports only one single subscriber.
+- Bloc + Hooks oriented archtecture
 
-// If [sync] is true,
+- for iOS this version needs nsphotolibraryusagedescription
+```plist
+<key>NSPhotoLibraryUsageDescription</key>
+<string>This app requires access to the photo library.</string>
+<key>NSMicrophoneUsageDescription</key>
+<string>This app does not require access to the microphone.</string>
+<key>NSCameraUsageDescription</key>
+<string>This app requires access to the camera.</string>
 ```
