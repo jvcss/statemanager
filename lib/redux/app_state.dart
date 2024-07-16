@@ -1,5 +1,4 @@
 import 'package:flutter/foundation.dart';
-import 'actions/item_actions.dart';
 import 'actions/filter_actions.dart';
 
 @immutable
