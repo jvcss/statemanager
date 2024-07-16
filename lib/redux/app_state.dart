@@ -3,11 +3,11 @@ import 'actions/item_actions.dart';
 import 'actions/filter_actions.dart';
 
 @immutable
-class State {
+class MyState {
   final Iterable<String> items;
   final ActionOptions filter;
 
-  const State({
+  const MyState({
     required this.items,
     required this.filter,
   });

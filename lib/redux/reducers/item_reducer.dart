@@ -1,5 +1,5 @@
 import 'package:redux/redux.dart' as redux;
-import '../actions/item_actions.dart';
+import 'package:statemanager/redux/actions/item_actions.dart';
 
 extension AddRemoveItems<T> on Iterable<T> {
   Iterable<T> operator +(T item) => followedBy([item]);

@@ -4,7 +4,7 @@ Many branches with all types of state management
 
 ## Getting Started
 
-This project is a starting point for a State Management Flutter application.
+This project is a starting point for a MyState Management Flutter application.
 
 You can clone a specific snippet project to avoid misstructured the concepts.
 

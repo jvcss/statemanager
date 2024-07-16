@@ -1,7 +1,7 @@
 import 'package:redux/redux.dart';
-import '../app_state.dart';
+import 'package:statemanager/redux/app_state.dart';
 
-void loggerMiddleware(Store<State> store, dynamic action, NextDispatcher next) {
+void loggerMiddleware(Store<MyState> store, dynamic action, NextDispatcher next) {
   print('dispatching $action');
   next(action);
   print('next state ${store.state}');

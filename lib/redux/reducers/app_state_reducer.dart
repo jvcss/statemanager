@@ -1,12 +1,10 @@
-import 'package:redux/redux.dart' as redux;
-import '../app_state.dart';
-import '../actions/item_actions.dart';
-import 'item_reducer.dart';
-import 'filter_reducer.dart';
+import 'package:statemanager/redux/app_state.dart';
+import 'package:statemanager/redux/reducers/filter_reducer.dart';
+import 'package:statemanager/redux/reducers/item_reducer.dart';
 
-State appStateReducer(State state, MyAction action) {
-  return State(
-    items: itemsReducer(state.items, action as ItemAction),
+MyState appStateReducer(MyState state,  action) {
+  return MyState(
+    items: itemsReducer(state.items, action),
     filter: itemFilterReducer(state, action),
   );
 }
