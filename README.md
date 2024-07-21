@@ -21,6 +21,10 @@ You can clone a specific snippet project to avoid misstructured the concepts.
     - `git clone --depth 1 -b bloc_management`
 
 - Bloc + Hooks oriented archtecture
+    ...
+
+<img src="assets/images/Screenshot_1720996214.png" width="320" height="720"/>
+
 
 - for iOS this version needs nsphotolibraryusagedescription
 ```plist
