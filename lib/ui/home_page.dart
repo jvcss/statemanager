@@ -39,7 +39,9 @@ class HomePage extends StatelessWidget {
               final controller = TextEditingController();
               return AlertDialog(
                 title: const Text('Adicionar Bot'),
-                content: TextField(controller: controller),
+                content: TextField(
+                  controller: controller,
+                ),
                 actions: [
                   TextButton(
                     onPressed: () {
