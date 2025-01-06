@@ -6,8 +6,9 @@ import 'package:statemanager/model/bot.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
-  Hive.registerAdapter(BotAdapter());
+  Hive.registerAdapter(
+    BotAdapter(),
+  );
   final botBox = await Hive.openBox<Bot>('bots');
   runApp(App(botBox: botBox));
 }
-
