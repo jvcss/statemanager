@@ -31,7 +31,10 @@ class BotState {
 class BotBloc extends Bloc<BotEvent, BotState> {
   final Box<Bot> botBox;
 
-  BotBloc(this.botBox) : super(BotState(botBox.values.toList())) {
+  BotBloc(this.botBox)
+      : super(
+          BotState(botBox.values.toList()),
+        ) {
     on<AddBot>((event, emit) {
       final newBot = Bot(name: event.name);
       botBox.put(event.name, newBot);
