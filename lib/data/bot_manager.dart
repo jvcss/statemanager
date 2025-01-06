@@ -20,7 +20,7 @@ void callbackDispatcher() {
 Future<void> initializeWorkManager() async {
   await Workmanager().initialize(callbackDispatcher);
   await Workmanager().registerPeriodicTask(
-    "1",
+    '1',
     updateBotsTask,
     frequency: const Duration(minutes: 15),
   );

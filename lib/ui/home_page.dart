@@ -3,12 +3,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../bloc/bot_bloc.dart';
 
 class HomePage extends StatelessWidget {
+  const HomePage({super.key});
+
   @override
   Widget build(BuildContext context) {
     final botBloc = context.read<BotBloc>();
 
     return Scaffold(
-      appBar: AppBar(title: Text('Bot Manager')),
+      appBar: AppBar(title: const Text('Bot Manager')),
       body: BlocBuilder<BotBloc, BotState>(
         builder: (context, state) {
           return ListView.builder(
@@ -19,7 +21,7 @@ class HomePage extends StatelessWidget {
                 title: Text(bot.name),
                 subtitle: Text('Tempo de Execução: ${bot.executionTime}s'),
                 trailing: IconButton(
-                  icon: Icon(Icons.delete),
+                  icon: const Icon(Icons.delete),
                   onPressed: () {
                     botBloc.add(DeleteBot(bot.name));
                   },
@@ -36,7 +38,7 @@ class HomePage extends StatelessWidget {
             builder: (context) {
               final controller = TextEditingController();
               return AlertDialog(
-                title: Text('Adicionar Bot'),
+                title: const Text('Adicionar Bot'),
                 content: TextField(controller: controller),
                 actions: [
                   TextButton(
@@ -44,14 +46,14 @@ class HomePage extends StatelessWidget {
                       botBloc.add(AddBot(controller.text));
                       Navigator.pop(context);
                     },
-                    child: Text('Adicionar'),
+                    child: const Text('Adicionar'),
                   ),
                 ],
               );
             },
           );
         },
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
       ),
     );
   }

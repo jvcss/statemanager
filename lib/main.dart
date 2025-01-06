@@ -23,7 +23,7 @@ class App extends StatelessWidget {
     return MaterialApp(
       home: BlocProvider(
         create: (_) => BotBloc(botBox),
-        child: HomePage(),
+        child: const HomePage(),
       ),
     );
   }

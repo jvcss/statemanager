@@ -10,16 +10,25 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:hive/hive.dart';
 
 import 'package:statemanager/main.dart';
+import 'package:statemanager/model/bot.dart';
 
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    final botBox = await Hive.openBox('bots');
-    // await tester.pumpWidget(const App(botBox: botBox,));
+    final botBox = await Hive.openBox<Bot>('bots');
+    await tester.pumpWidget(App(
+      botBox: botBox,
+    ));
 
     // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+    expect(
+      find.text('0'),
+      findsOneWidget,
+    );
+    expect(
+      find.text('1'),
+      findsNothing,
+    );
 
     // Tap the '+' icon and trigger a frame.
     await tester.tap(find.byIcon(Icons.add));
