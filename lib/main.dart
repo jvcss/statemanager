@@ -1,22 +1,30 @@
 import 'package:flutter/material.dart';
-import 'package:statemanager/view/home_view.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:statemanager/model/bot.dart';
+import 'package:statemanager/ui/home_page.dart';
+import 'bloc/bot_bloc.dart';
 
-void main() {
-  runApp(const App());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Hive.initFlutter();
+  Hive.registerAdapter(BotAdapter());
+  final botBox = await Hive.openBox<Bot>('bots');
+  runApp(App(botBox: botBox));
 }
 
 class App extends StatelessWidget {
-  const App({super.key});
+  final Box<Bot> botBox;
+
+  const App({super.key, required this.botBox});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+      home: BlocProvider(
+        create: (_) => BotBloc(botBox),
+        child: HomePage(),
       ),
-      home: const HomePage(),
     );
   }
 }

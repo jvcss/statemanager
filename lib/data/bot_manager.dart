@@ -1,0 +1,27 @@
+import 'package:statemanager/model/bot.dart';
+import 'package:workmanager/workmanager.dart';
+import 'package:hive/hive.dart';
+
+const updateBotsTask = 'update_bots_task';
+
+void callbackDispatcher() {
+  Workmanager().executeTask((task, inputData) async {
+    if (task == updateBotsTask) {
+      final box = await Hive.openBox<Bot>('bots');
+      for (var bot in box.values) {
+        bot.executionTime += 1;
+        box.put(bot.name, bot);
+      }
+    }
+    return Future.value(true);
+  });
+}
+
+Future<void> initializeWorkManager() async {
+  await Workmanager().initialize(callbackDispatcher);
+  await Workmanager().registerPeriodicTask(
+    "1",
+    updateBotsTask,
+    frequency: const Duration(minutes: 15),
+  );
+}
