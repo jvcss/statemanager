@@ -8,8 +8,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hive/hive.dart';
+import 'package:statemanager/app.dart';
 
-import 'package:statemanager/main.dart';
 import 'package:statemanager/model/bot.dart';
 
 void main() {
