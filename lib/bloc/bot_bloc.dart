@@ -16,6 +16,10 @@ class UpdateBotTime extends BotEvent {
   UpdateBotTime(this.botName);
 }
 
+class UpdateBots extends BotEvent {
+  UpdateBots();
+}
+
 class DeleteBot extends BotEvent {
   final String botName;
 
@@ -48,6 +52,14 @@ class BotBloc extends Bloc<BotEvent, BotState> {
         botBox.put(event.botName, bot);
         emit(BotState(botBox.values.toList()));
       }
+    });
+
+    on<UpdateBots>((event, emit) {
+      for (var bot in botBox.values) {
+        bot.executionTime += 1;
+        botBox.put(bot.name, bot);
+      }
+      emit(BotState(botBox.values.toList()));
     });
 
     on<DeleteBot>((event, emit) {

@@ -5,28 +5,34 @@ import 'package:hive/hive.dart';
 
 const updateBotsTask = 'update_bots_task';
 
-@pragma('vm:entry-point') // Mandatory if the App is obfuscated or using Flutter 3.1+
+@pragma(
+    'vm:entry-point') // Mandatory if the App is obfuscated or using Flutter 3.1+
 void callbackDispatcher() {
   Workmanager().executeTask((task, inputData) async {
+    debugPrint('Task executada: $task');
 
-
-    debugPrint('Task executada: $task'); // Verifique se esse log aparece
     if (task == updateBotsTask) {
       final box = await Hive.openBox<Bot>('bots');
       for (var bot in box.values) {
-        bot.executionTime += 10;
+        bot.executionTime += 10; // Atualiza tempo
         box.put(bot.name, bot);
+        debugPrint('Bot atualizado: ${bot.name}, Tempo: ${bot.executionTime}');
       }
+      await box.close(); // Fecha o box após o uso
     }
+
     return Future.value(true);
   });
 }
 
 Future<void> initializeWorkManager() async {
-  await Workmanager().initialize(callbackDispatcher, isInDebugMode: true,);
+  await Workmanager().initialize(
+    callbackDispatcher,
+    isInDebugMode: true,
+  );
   await Workmanager().registerPeriodicTask(
     'crytosafe.update_bots_task',
     updateBotsTask,
-    frequency: const Duration(minutes: 15),
+    frequency: const Duration(minutes: 15), // Mínimo permitido pelo WorkManager
   );
 }

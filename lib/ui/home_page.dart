@@ -1,9 +1,43 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:statemanager/model/bot.dart';
 import '../bloc/bot_bloc.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  Timer? _updateTimer;
+
+  @override
+  void initState() {
+    super.initState();
+    _startTimer();
+  }
+
+  @override
+  void dispose() {
+    _updateTimer?.cancel();
+    super.dispose();
+  }
+
+  void _startTimer() {
+    _updateTimer = Timer.periodic(const Duration(minutes: 1), (timer) async {
+      final box = Hive.box<Bot>('bots');
+      for (var bot in box.values) {
+        bot.executionTime += 1; // Incrementa tempo manualmente
+        await box.put(bot.name, bot);
+      }
+      setState(() {}); // Atualiza UI
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +51,7 @@ class HomePage extends StatelessWidget {
           return RefreshIndicator(
             onRefresh: () async {
               await Future.delayed(const Duration(seconds: 1));
-              botBloc.add(UpdateBotTime('c'));
+              botBloc.add(UpdateBots());
             },
             child: ListView.builder(
               itemCount: state.bots.length,
