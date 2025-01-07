@@ -9,14 +9,14 @@ import 'package:workmanager/workmanager.dart';
 
 void main() => runApp(const MyApp());
 
-const simpleTaskKey = 'be.tramckrijte.workmanagerExample.simpleTask';
-const rescheduledTaskKey = 'be.tramckrijte.workmanagerExample.rescheduledTask';
-const failedTaskKey = 'be.tramckrijte.workmanagerExample.failedTask';
-const simpleDelayedTask = 'be.tramckrijte.workmanagerExample.simpleDelayedTask';
+const simpleTaskKey = 'simpleTask';
+const rescheduledTaskKey = 'rescheduledTask';
+const failedTaskKey = 'failedTask';
+const simpleDelayedTask = 'simpleDelayedTask';
 const simplePeriodicTask =
-    'be.tramckrijte.workmanagerExample.simplePeriodicTask';
+    'simplePeriodicTask';
 const simplePeriodic1HourTask =
-    'be.tramckrijte.workmanagerExample.simplePeriodic1HourTask';
+    'simplePeriodic1HourTask';
 
 @pragma(
     'vm:entry-point') // Mandatory if the App is obfuscated or using Flutter 3.1+
@@ -93,6 +93,7 @@ class MyAppState extends State<MyApp> {
                 ElevatedButton(
                   child: const Text('Start the Flutter background service'),
                   onPressed: () {
+                    debugPrint('WorkManager service started');
                     Workmanager().initialize(
                       callbackDispatcher,
                       isInDebugMode: true,
@@ -161,7 +162,8 @@ class MyAppState extends State<MyApp> {
                             Workmanager().registerPeriodicTask(
                               simplePeriodicTask,
                               simplePeriodicTask,
-                              initialDelay: const Duration(seconds: 10),
+                              initialDelay: const Duration(seconds: 1),
+                              frequency: const Duration(minutes: 15),
                             );
                           }
                         : null,
