@@ -12,22 +12,29 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('Bot Manager')),
       body: BlocBuilder<BotBloc, BotState>(
+        buildWhen: (previous, current) => previous.bots != current.bots,
         builder: (context, state) {
-          return ListView.builder(
-            itemCount: state.bots.length,
-            itemBuilder: (context, index) {
-              final bot = state.bots[index];
-              return ListTile(
-                title: Text(bot.name),
-                subtitle: Text('Tempo de Execução: ${bot.executionTime}s'),
-                trailing: IconButton(
-                  icon: const Icon(Icons.delete),
-                  onPressed: () {
-                    botBloc.add(DeleteBot(bot.name));
-                  },
-                ),
-              );
+          return RefreshIndicator(
+            onRefresh: () async {
+              await Future.delayed(const Duration(seconds: 1));
+              botBloc.add(UpdateBotTime('c'));
             },
+            child: ListView.builder(
+              itemCount: state.bots.length,
+              itemBuilder: (context, index) {
+                final bot = state.bots[index];
+                return ListTile(
+                  title: Text(bot.name),
+                  subtitle: Text('Tempo de Execução: ${bot.executionTime}s'),
+                  trailing: IconButton(
+                    icon: const Icon(Icons.delete),
+                    onPressed: () {
+                      botBloc.add(DeleteBot(bot.name));
+                    },
+                  ),
+                );
+              },
+            ),
           );
         },
       ),

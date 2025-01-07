@@ -9,7 +9,7 @@ void callbackDispatcher() {
     if (task == updateBotsTask) {
       final box = await Hive.openBox<Bot>('bots');
       for (var bot in box.values) {
-        bot.executionTime += 1;
+        bot.executionTime += 10;
         box.put(bot.name, bot);
       }
     }
