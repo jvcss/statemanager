@@ -29,7 +29,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   void _startTimer() {
-    _updateTimer = Timer.periodic(const Duration(minutes: 1), (timer) async {
+    _updateTimer = Timer.periodic(const Duration(seconds: 10), (timer) async {
       final box = Hive.box<Bot>('bots');
       for (var bot in box.values) {
         bot.executionTime += 1; // Incrementa tempo manualmente
