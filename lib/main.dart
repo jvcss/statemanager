@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:statemanager/view/home_view.dart';
+import 'package:statemanager/widgets/scatter_chart_widget.dart';
 
 void main() {
   runApp(const App());
@@ -13,10 +13,10 @@ class App extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.black87),
         useMaterial3: true,
       ),
-      home: const HomePage(),
+      home: const ScatterChartWidget(),
     );
   }
 }
