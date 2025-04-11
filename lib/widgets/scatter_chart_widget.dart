@@ -1,70 +1,69 @@
 import 'package:flutter/material.dart';
-import 'package:fl_chart/fl_chart.dart';
+import 'dart:math' as m;
 
 import 'package:statemanager/models/point_data.dart';
 
-class ScatterChartWidget extends StatefulWidget {
+class ScatterChartWidget extends StatelessWidget {
   final List<PointData>? data;
-  const ScatterChartWidget({super.key, this.data});
+  final double width;
+  final double height;
 
-  @override
-  ScatterChartWidgetState createState() => ScatterChartWidgetState();
-}
+  ScatterChartWidget({
+    super.key,
+    this.data,
+    required this.width,
+    required this.height,
+  });
 
-class ScatterChartWidgetState extends State<ScatterChartWidget> {
-  late Future<List<PointData>> _futureData;
-
-  List<PointData> mockData = [
-    PointData(x: 1, y: 2),
-    PointData(x: 2, y: 4),
-    PointData(x: 3, y: 1),
-    PointData(x: 4, y: 3),
+  final List<PointData> mockData = [
+    PointData(x: 1, y: 2, color: Colors.blue),
+    PointData(x: 2, y: 4, color: Colors.green),
+    PointData(x: 3, y: 1, color: Colors.red),
+    PointData(x: 4, y: 3, color: Colors.orange),
   ];
 
   @override
-  void initState() {
-    super.initState();
-    _futureData = _loadData();
-  }
-
-  Future<List<PointData>> _loadData() async {
-    try {
-      return widget.data ?? mockData;
-    } catch (e) {
-      return mockData;
-    }
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return FutureBuilder<List<PointData>>(
-      future: _futureData,
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(child: CircularProgressIndicator());
-        }
-        final data = snapshot.data ?? mockData;
-        return _buildChart(data);
-      },
-    );
-  }
-  // todo: add params
-  Widget _buildChart(List<PointData> data) {
+    final chartData = data ?? mockData;
+    final maxX = chartData.map((d) => d.x).reduce(m.max).toDouble() + 1;
+    final maxY = chartData.map((d) => d.y).reduce(m.max).toDouble() + 1;
+
     return Container(
       padding: const EdgeInsets.all(16.0),
-      child: ScatterChart(
-        ScatterChartData(
-          scatterSpots: data
-              .map((d) => ScatterSpot(d.x.toDouble(), d.y.toDouble()))
-              .toList(),
-          minX: 0,
-          maxX: 5,
-          minY: 0,
-          maxY: 5,
-          borderData: FlBorderData(show: true),
-        ),
+      height: 300,
+      child: CustomPaint(
+        painter: ScatterChartPainter(chartData, maxX, maxY),
+        child: Container(),
       ),
     );
   }
 }
 
+class ScatterChartPainter extends CustomPainter {
+  final List<PointData> data;
+  final double maxX;
+  final double maxY;
+
+  ScatterChartPainter(this.data, this.maxX, this.maxY);
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final paint = Paint()..style = PaintingStyle.fill;
+
+    for (final point in data) {
+      final dx = (point.x / maxX) * size.width;
+      final dy = size.height - (point.y / maxY) * size.height;
+      paint.color = point.color.withOpacity(0.7);
+      canvas.drawCircle(Offset(dx, dy), 8, paint);
+    }
+
+    final borderPaint = Paint()
+      ..color = Colors.black
+      ..strokeWidth = 1
+      ..style = PaintingStyle.stroke;
+    canvas.drawRect(Rect.fromLTWH(0, 0, size.width, size.height), borderPaint);
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) => true;
+}
