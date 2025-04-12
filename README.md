@@ -12,18 +12,26 @@ You can clone a specific snippet project to avoid misstructured the concepts.
 
     - `git clone --depth 1 -b vanilla_state_manager_crud `
 
+- ...
 
-- Inhented Widget + API + Animation Controller
+- How to implement Visuals?
 
-    - `git clone --depth 1 -b inheritedWidget_state_management`
-
-- Bloc Manager
-    - `git clone --depth 1 -b bloc_management`
-
-- How to implement synchronous stream?
 ```dart
-final _text = StreamController<String>();
-// A controller with a [stream] that supports only one single subscriber.
-
-// If [sync] is true,
+GaugeChartWidget(
+    width: 200,
+    height: 300,
+    data: GaugeData(
+        label: 'Gauge',
+        color: Colors.blue,
+        backgroundColor: Colors.grey,
+        strokeWidth: 20.0,
+        showText: true,
+        value: random.nextDouble() * 100,
+    ),
+),
 ```
+
+- Features example!
+
+![Image](/doc/features.png)
+
