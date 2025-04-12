@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:statemanager/models/single_value_data.dart';
+import 'package:statemanager/models/single_card_data.dart';
 
 class SingleValueCardWidget extends StatelessWidget {
   const SingleValueCardWidget({
@@ -12,7 +12,7 @@ class SingleValueCardWidget extends StatelessWidget {
 
   final double width;
   final double height;
-  final SingleValueData data;
+  final SingleCardData data;
 
   @override
   Widget build(BuildContext context) {

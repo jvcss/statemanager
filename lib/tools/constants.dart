@@ -30,7 +30,7 @@ List<Widget> listCharts = [
   const SingleValueCardWidget(
     width: 200,
     height: 200,
-    data: SingleValueData(
+    data: SingleCardData(
       value: 'R\$ 100',
       label: 'Total',//fff0f2
       color: Color(0xFF4CAF50),//Color(0xFFfff0f2),//
