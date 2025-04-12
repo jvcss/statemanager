@@ -6,23 +6,52 @@ import 'package:statemanager/models/gauge_data.dart';
 class GaugeChartWidget extends StatefulWidget {
   const GaugeChartWidget({
     super.key,
-    this.width,
-    this.height,
-    required this.data,
+    this.width = 200.0,
+    this.height = 200.0,
+    this.data = const GaugeData(
+      color: Colors.blue,
+      backgroundColor: Colors.grey,
+      strokeWidth: 20.0,
+      showText: true,
+      value: 0.7,
+    ),
   });
 
-  final double? width;
-  final double? height;
-  final GaugeData data;
+  final double width;
+  final double height;
+  final GaugeData? data;
 
   @override
   State<GaugeChartWidget> createState() => _GaugeChartWidgetState();
 }
 
 class _GaugeChartWidgetState extends State<GaugeChartWidget> {
+  final List<GaugeData> mockData = const [
+    GaugeData(
+      color: Colors.blue,
+      backgroundColor: Colors.grey,
+      strokeWidth: 20.0,
+      showText: true,
+      value: 0.7,
+    ),
+    GaugeData(
+      color: Colors.green,
+      backgroundColor: Colors.grey,
+      strokeWidth: 20.0,
+      showText: true,
+      value: 0.5,
+    ),
+    GaugeData(
+      color: Colors.red,
+      backgroundColor: Colors.grey,
+      strokeWidth: 20.0,
+      showText: true,
+      value: 0.3,
+    ),
+  ];
   @override
   Widget build(BuildContext context) {
-    final data = widget.data;
+    final data = widget.data ?? mockData[0];
     return SizedBox(
       width: widget.width,
       height: widget.height,

@@ -1,7 +1,7 @@
 
 import 'package:flutter/widgets.dart' show Widget;
 
-import 'package:statemanager/widgets/widgets.dart' show BubbleChartWidget, ScatterChartWidget, TreeMapChartWidget;
+import 'package:statemanager/widgets/widgets.dart' show BubbleChartWidget, ScatterChartWidget, TreeMapChartWidget, GaugeChartWidget;
 
 List<Widget> listCharts = [
   const TreeMapChartWidget(
@@ -16,4 +16,9 @@ List<Widget> listCharts = [
     width: 200,
     height: 300,
   ),
+  const GaugeChartWidget(
+    width: 200,
+    height: 300,
+  ),
+
 ];
