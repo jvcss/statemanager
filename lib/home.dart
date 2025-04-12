@@ -5,23 +5,7 @@ import 'dart:math' as math;
 import 'package:statemanager/tools/constants.dart';
 import 'package:statemanager/widgets/widgets.dart';
 
-import 'models/models.dart';
-
-void main() => runApp(const App());
-
-class App extends StatelessWidget {
-  const App({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(colorSchemeSeed: Colors.blue),
-      home: const HomePage(title: 'Flutter Demo Home Page'),
-    );
-  }
-}
+import 'package:statemanager/models/models.dart';
 
 class HomePage extends StatefulWidget {
   final String title;
