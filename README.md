@@ -12,26 +12,26 @@ You can clone a specific snippet project to avoid misstructured the concepts.
 
     - `git clone --depth 1 -b vanilla_state_manager_crud `
 
+- ...
 
-- Inhented Widget + API + Animation Controller
+- How to implement Visuals?
 
-    - `git clone --depth 1 -b inheritedWidget_state_management`
-
-- Bloc Manager
-    - `git clone --depth 1 -b bloc_management`
-
-- Bloc + Hooks oriented archtecture
-    ...
-
-<img src="assets/images/Screenshot_1720996214.png" width="320" height="720"/>
-
-
-- for iOS this version needs nsphotolibraryusagedescription
-```plist
-<key>NSPhotoLibraryUsageDescription</key>
-<string>This app requires access to the photo library.</string>
-<key>NSMicrophoneUsageDescription</key>
-<string>This app does not require access to the microphone.</string>
-<key>NSCameraUsageDescription</key>
-<string>This app requires access to the camera.</string>
+```dart
+GaugeChartWidget(
+    width: 200,
+    height: 300,
+    data: GaugeData(
+        label: 'Gauge',
+        color: Colors.blue,
+        backgroundColor: Colors.grey,
+        strokeWidth: 20.0,
+        showText: true,
+        value: random.nextDouble() * 100,
+    ),
+),
 ```
+
+- Features example!
+
+![Image](/doc/features.png)
+

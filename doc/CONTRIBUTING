@@ -1,0 +1,98 @@
+# 📌 Flutter Overlay Strategy (MVVM + GetX Friendly)
+
+Este módulo propõe uma **estrutura escalável para uso de overlays embutidos** no app Flutter, permitindo guiar o usuário (onboarding, foco em widgets, instruções contextuais) de forma reusável e desacoplada. Ideal para primeira navegação ou tutoriais interativos.
+
+## 🚀 Objetivo
+
+Facilitar o crescimento do app ao longo do tempo com um adaptador único que injeta overlays visuais em qualquer parte da UI, sem exigir múltiplas instâncias de lógica por tela.
+
+---
+
+## 🧠 Conceito Arquitetural
+
+**Camadas envolvidas:**
+
+- `OverlayController` → Gerencia o estado do overlay (aberto, alvo, estilo)
+- `OverlayService` → Responsável pela criação e remoção do `OverlayEntry`
+- `OverlayWrapper` → Widget que envolve a UI base e permite ativar overlay sobre widgets-alvo
+- `OverlayBinding` → Vincula controller ao ciclo de vida da rota
+- `@OnboardingStep` → Pode ser usado como anotação/filtro para exibir overlay por contexto
+
+---
+
+## 📦 Estrutura Recomendada
+
+```
+/lib
+├── overlays/
+│   ├── overlay_controller.dart      # extends GetxController
+│   ├── overlay_service.dart         # Singleton com lógica de OverlayEntry
+│   ├── overlay_wrapper.dart         # Widget HOC que aplica overlay
+│   ├── onboarding_steps.dart        # Enum ou configuração de passos
+│   └── overlay_binding.dart         # Binding para rotas que usam overlay
+```
+
+---
+
+## 🔁 Ciclo de Vida do Overlay
+
+```mermaid
+graph TD;
+    Start -->|Init| OverlayController
+    OverlayController --> OverlayService
+    OverlayService -->|Create| OverlayEntry
+    OverlayEntry --> OverlayWrapper
+    UserTap -->|Dismiss| OverlayService
+    OverlayService -->|Remove| OverlayEntry
+```
+
+---
+
+## 🧪 Exemplo de Uso com GetX
+
+```dart
+// Injeção automática
+class OverlayBinding extends Bindings {
+  @override
+  void dependencies() {
+    Get.lazyPut<OverlayController>(() => OverlayController());
+  }
+}
+
+// Aplicação de overlay na view
+OverlayWrapper(
+  child: MyPageContent(),
+  step: OnboardingSteps.exploreTab,
+)
+```
+
+---
+
+## 🧹 Modularização Avançada (Opcional)
+
+- Use `OverlayModule` para agrupar tudo como plugin do app
+- Permite ativar/desativar overlays dinamicamente por feature flag ou nível de acesso
+- Pode integrar com GetStorage para lembrar se o usuário já viu os highlights
+
+---
+
+## ✅ Boas Práticas
+
+- Prefira `OverlayEntry` com `SafeArea` e `Align` para melhor posicionamento
+- Use `GetBuilder` ou `Obx` no overlay apenas se precisar responder a mudanças de estado
+- Controle o ciclo do overlay diretamente pelo Controller (evita leaks)
+- Sempre chame `dispose()` no controller ou `removeEntry()` ao sair da tela
+- Evite overlays múltiplos empilhados sem controle – mantenha singleton ativo
+
+---
+
+## 🧭 Futuro
+
+- Permitir animações de entrada e saída
+- Suporte a múltiplos idiomas no overlay (`.tr`)
+- Persistência de progresso de onboarding via local storage
+
+---
+
+Feito para apps MVVM usando **Flutter 3.x + GetX 5.x**, com suporte total à **reatividade leve** e **inicialização modular**.
+
