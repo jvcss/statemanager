@@ -96,8 +96,8 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
         GaugeChartWidget(
-          width: 50,
-          height: 50,
+          width: 200,
+          height: 300,
           data: GaugeData(
             label: 'Gauge',
             color: Colors.blue,
