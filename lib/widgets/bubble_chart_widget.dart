@@ -1,12 +1,7 @@
 import 'package:flutter/material.dart';
-import 'dart:math' as m;
-class BubbleData {
-  final int x;
-  final int y;
-  final double size;
-  final Color color;
-  const BubbleData({required this.x, required this.y, required this.size, required this.color});
-}
+import 'dart:math' as math;
+
+import 'package:statemanager/models/bubble_data.dart';
 
 class BubbleChartWidget extends StatefulWidget {
   const BubbleChartWidget({
@@ -41,9 +36,9 @@ class _BubbleChartWidgetState extends State<BubbleChartWidget> {
   @override
   Widget build(BuildContext context) {
     final chartData = widget.data ?? mockData;
-    final maxX = chartData.map((d) => d.x).reduce(m.max).toDouble() + 1;
-    final maxY = chartData.map((d) => d.y).reduce(m.max).toDouble() + 1;
-    final maxSize = chartData.map((d) => d.size).reduce(m.max);
+    final maxX = chartData.map((d) => d.x).reduce(math.max).toDouble() + 1;
+    final maxY = chartData.map((d) => d.y).reduce(math.max).toDouble() + 1;
+    final maxSize = chartData.map((d) => d.size).reduce(math.max);
 
     return SizedBox(
       width: widget.width,
@@ -89,7 +84,8 @@ class _BubbleChartPainter extends CustomPainter {
     required this.maxBubbleSize,
     required this.opacity,
     required this.showBorder,
-  });
+  }): assert(opacity >= 0.0 && opacity <= 1.0,
+            'Opacity must be between 0.0 and 1.0');
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -99,7 +95,7 @@ class _BubbleChartPainter extends CustomPainter {
       final dx = (point.x / maxX) * size.width;
       final dy = size.height - (point.y / maxY) * size.height;
       final radius = (point.size / maxSize) * maxBubbleSize;
-      paint.color = point.color.withOpacity(opacity);
+      paint.color = point.color.withAlpha((opacity * 255).toInt());
       canvas.drawCircle(Offset(dx, dy), radius, paint);
     }
 
@@ -108,7 +104,8 @@ class _BubbleChartPainter extends CustomPainter {
         ..color = Colors.black
         ..strokeWidth = 1
         ..style = PaintingStyle.stroke;
-      canvas.drawRect(Rect.fromLTWH(0, 0, size.width, size.height), borderPaint);
+      canvas.drawRect(
+          Rect.fromLTWH(0, 0, size.width, size.height), borderPaint);
     }
   }
 

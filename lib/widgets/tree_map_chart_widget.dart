@@ -1,11 +1,5 @@
 import 'package:flutter/material.dart';
-
-class TreeMapData {
-  final String label;
-  final double value;
-  final Color color;
-  const TreeMapData({required this.label, required this.value, required this.color});
-}
+import 'package:statemanager/models/tree_map_data.dart';
 
 class TreeMapChartWidget extends StatefulWidget {
   const TreeMapChartWidget({
