@@ -32,8 +32,8 @@ List<Widget> listCharts = [
     height: 200,
     data: SingleValueData(
       value: 'R\$ 100',
-      label: 'Total',
-      //color: Color(0xFFE0E0E0),//Color(0xFF4CAF50),
+      label: 'Total',//fff0f2
+      color: Color(0xFF4CAF50),//Color(0xFFfff0f2),//
       icon: Icons.check_circle,
     ),
   ),
