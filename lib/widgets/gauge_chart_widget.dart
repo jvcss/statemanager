@@ -31,53 +31,56 @@ class _GaugeChartWidgetState extends State<GaugeChartWidget> {
       value: 0.7,
       maxValue: 1.0,
     );
-    return SizedBox(
-      width: widget.width,
-      height: widget.height,
-      child: Card(
-        elevation: 4,
-        margin: const EdgeInsets.all(8),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: CustomPaint(
-            painter: _GaugePainter(
-              percent: data.percent,
-              color: data.color,
-              backgroundColor: data.backgroundColor,
-              strokeWidth: data.strokeWidth,
-            ),
-            child: Center(
-              child: data.showText
-                  ? Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text(
-                          '${(data.percent * 100).toInt()}%',
-                          style: Theme.of(context)
-                              .textTheme
-                              .headlineMedium
-                              ?.copyWith(
-                                fontFamily: 'Outfit',
-                                color: Colors.black,
-                                fontWeight: FontWeight.w600,
-                              ),
-                        ),
-                        if (data.label != null)
+    return AspectRatio(
+      aspectRatio: 2.0,
+      child: SizedBox(
+        width: widget.width,
+        height: widget.height,
+        child: Card(
+          elevation: 4,
+          margin: const EdgeInsets.all(8),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: CustomPaint(
+              painter: _GaugePainter(
+                percent: data.percent,
+                color: data.color,
+                backgroundColor: data.backgroundColor,
+                strokeWidth: data.strokeWidth,
+              ),
+              child: Center(
+                child: data.showText
+                    ? Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
                           Text(
-                            data.label!,
+                            '${(data.percent * 100).toInt()}%',
                             style: Theme.of(context)
                                 .textTheme
-                                .bodyMedium
+                                .headlineMedium
                                 ?.copyWith(
                                   fontFamily: 'Outfit',
                                   color: Colors.black,
-                                  fontWeight: FontWeight.w400,
+                                  fontWeight: FontWeight.w600,
                                 ),
                           ),
-                      ],
-                    )
-                  : const SizedBox.shrink(),
+                          if (data.label != null)
+                            Text(
+                              data.label!,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyMedium
+                                  ?.copyWith(
+                                    fontFamily: 'Outfit',
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                            ),
+                        ],
+                      )
+                    : const SizedBox.shrink(),
+              ),
             ),
           ),
         ),
