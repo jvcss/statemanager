@@ -1,7 +1,14 @@
+import 'package:flutter/material.dart' show Color, Widget, Icons;
 
-import 'package:flutter/widgets.dart' show Widget;
+import 'package:statemanager/models/models.dart';
 
-import 'package:statemanager/widgets/widgets.dart' show BubbleChartWidget, ScatterChartWidget, TreeMapChartWidget, GaugeChartWidget;
+import 'package:statemanager/widgets/widgets.dart'
+    show
+        BubbleChartWidget,
+        ScatterChartWidget,
+        TreeMapChartWidget,
+        GaugeChartWidget,
+        SingleValueCardWidget;
 
 List<Widget> listCharts = [
   const TreeMapChartWidget(
@@ -20,5 +27,14 @@ List<Widget> listCharts = [
     width: 200,
     height: 300,
   ),
-
+  const SingleValueCardWidget(
+    width: 200,
+    height: 200,
+    data: SingleValueData(
+      value: 'R\$ 100',
+      label: 'Total',
+      //color: Color(0xFFE0E0E0),//Color(0xFF4CAF50),
+      icon: Icons.check_circle,
+    ),
+  ),
 ];
