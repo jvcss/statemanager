@@ -1,13 +1,13 @@
 
 import 'package:flutter/widgets.dart' show IconData, Color;
 
-class SingleValueData {
+class SingleCardData {
   final String value;
   final String? label;
   final IconData? icon;
   final Color color;
 
-  const SingleValueData({
+  const SingleCardData({
     required this.value,
     this.label,
     this.icon,
