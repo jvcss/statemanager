@@ -95,6 +95,17 @@ class _HomePageState extends State<HomePage> {
                 color: Colors.orange),
           ],
         ),
+        GaugeChartWidget(
+          width: 200,
+          height: 300,
+          data: GaugeData(
+            color: Colors.blue,
+            backgroundColor: Colors.grey,
+            strokeWidth: 20.0,
+            showText: true,
+            value: random.nextDouble() * 100,
+          ),
+        ),
       ];
     });
   }
