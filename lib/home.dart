@@ -99,6 +99,7 @@ class _HomePageState extends State<HomePage> {
           width: 200,
           height: 300,
           data: GaugeData(
+            label: 'Gauge',
             color: Colors.blue,
             backgroundColor: Colors.grey,
             strokeWidth: 20.0,

@@ -8,13 +8,7 @@ class GaugeChartWidget extends StatefulWidget {
     super.key,
     this.width = 200.0,
     this.height = 200.0,
-    this.data = const GaugeData(
-      color: Colors.blue,
-      backgroundColor: Colors.grey,
-      strokeWidth: 20.0,
-      showText: true,
-      value: 0.7,
-    ),
+    this.data,
   });
 
   final double width;
@@ -26,32 +20,17 @@ class GaugeChartWidget extends StatefulWidget {
 }
 
 class _GaugeChartWidgetState extends State<GaugeChartWidget> {
-  final List<GaugeData> mockData = const [
-    GaugeData(
+  @override
+  Widget build(BuildContext context) {
+    final data = widget.data ?? const GaugeData(
+      label: 'Gauge Chart',
       color: Colors.blue,
       backgroundColor: Colors.grey,
       strokeWidth: 20.0,
       showText: true,
       value: 0.7,
-    ),
-    GaugeData(
-      color: Colors.green,
-      backgroundColor: Colors.grey,
-      strokeWidth: 20.0,
-      showText: true,
-      value: 0.5,
-    ),
-    GaugeData(
-      color: Colors.red,
-      backgroundColor: Colors.grey,
-      strokeWidth: 20.0,
-      showText: true,
-      value: 0.3,
-    ),
-  ];
-  @override
-  Widget build(BuildContext context) {
-    final data = widget.data ?? mockData[0];
+      maxValue: 1.0,
+    );
     return SizedBox(
       width: widget.width,
       height: widget.height,
