@@ -61,4 +61,37 @@ List<Widget> listCharts = [
       ],
     ),
   ),
+  const MatrixChartWidget(
+    width: 200,
+    height: 300,
+    data: MatrixData(
+      headers: ['Categoria', 'Valor'],
+      rows: [
+        MatrixRow([
+          MatrixCell(label: 'Receita', indent: 0),
+          MatrixCell(label: 'R\$ 100K')
+        ]),
+        MatrixRow([
+          MatrixCell(label: '▸ Vendas', indent: 1),
+          MatrixCell(label: 'R\$ 80K')
+        ]),
+        MatrixRow([
+          MatrixCell(label: '▸ Serviços', indent: 1),
+          MatrixCell(label: 'R\$ 20K')
+        ]),
+        MatrixRow([
+          MatrixCell(label: 'Despesas', indent: 0),
+          MatrixCell(label: 'R\$ 60K')
+        ]),
+        MatrixRow([
+          MatrixCell(label: '▸ Operacionais', indent: 1),
+          MatrixCell(label: 'R\$ 40K')
+        ]),
+        MatrixRow([
+          MatrixCell(label: '▸ Administrativas', indent: 1),
+          MatrixCell(label: 'R\$ 20K')
+        ]),
+      ],
+    ),
+  )
 ];

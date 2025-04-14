@@ -6,3 +6,4 @@ export 'single_card_data.dart';
 export 'multi_card_data.dart';
 export 'funnel_data.dart';
 export 'table_data.dart';
+export 'matrix_data.dart';

@@ -6,3 +6,4 @@ export 'single_value_chart_widget.dart';
 export 'multi_value_chart_widget.dart';
 export 'funnel_chart_widget.dart';
 export 'table_chart_widget.dart';
+export 'matrix_chart_widget.dart';
