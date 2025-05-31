@@ -1,130 +1,63 @@
+import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
 
-import 'package:statemanager/tools/constants.dart';
-import 'package:statemanager/widgets/widgets.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:rxdart/rxdart.dart';
 
-import 'package:statemanager/models/models.dart';
-
-class HomePage extends StatefulWidget {
-  final String title;
-
-  const HomePage({super.key, required this.title});
-
-  @override
-  State<HomePage> createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  void _refillGraphs() {
-    // some random x y values
-    final random = math.Random();
-    final xValues = List.generate(10, (_) => random.nextInt(10) + 1);
-    final yValues = List.generate(10, (_) => random.nextInt(10) + 1);
-    final sizeValues = List.generate(10, (_) => random.nextDouble() * 100 + 1);
-    setState(() {
-      listCharts = [
-        TreeMapChartWidget(
-          width: 200,
-          height: 200,
-          data: [
-            TreeMapData(
-                label: 'A',
-                value: sizeValues[random.nextInt(10)],
-                color: Colors.blue),
-            TreeMapData(
-                label: 'B',
-                value: sizeValues[random.nextInt(10)],
-                color: Colors.green),
-            TreeMapData(
-                label: 'C',
-                value: sizeValues[random.nextInt(10)],
-                color: Colors.red),
-            TreeMapData(
-                label: 'D',
-                value: sizeValues[random.nextInt(10)],
-                color: Colors.orange),
-          ],
-        ),
-        ScatterChartWidget(
-          width: 200,
-          height: 300,
-          data: [
-            ScatterData(
-                x: xValues[random.nextInt(10)],
-                y: yValues[random.nextInt(10)],
-                color: Colors.blue),
-            ScatterData(
-                x: xValues[random.nextInt(10)],
-                y: yValues[random.nextInt(10)],
-                color: Colors.green),
-            ScatterData(
-                x: xValues[random.nextInt(10)],
-                y: yValues[random.nextInt(10)],
-                color: Colors.red),
-            ScatterData(
-                x: xValues[random.nextInt(10)],
-                y: yValues[random.nextInt(10)],
-                color: Colors.orange),
-          ],
-        ),
-        BubbleChartWidget(
-          width: 200,
-          height: 300,
-          data: [
-            BubbleData(
-                x: xValues[random.nextInt(10)],
-                y: yValues[random.nextInt(10)],
-                size: 20,
-                color: Colors.blue),
-            BubbleData(
-                x: xValues[random.nextInt(10)],
-                y: yValues[random.nextInt(10)],
-                size: 30,
-                color: Colors.green),
-            BubbleData(
-                x: xValues[random.nextInt(10)],
-                y: yValues[random.nextInt(10)],
-                size: 10,
-                color: Colors.red),
-            BubbleData(
-                x: xValues[random.nextInt(10)],
-                y: yValues[random.nextInt(10)],
-                size: 25,
-                color: Colors.orange),
-          ],
-        ),
-        GaugeChartWidget(
-          width: 200,
-          height: 300,
-          data: GaugeData(
-            label: 'Gauge',
-            color: Colors.blue,
-            backgroundColor: Colors.grey,
-            strokeWidth: 20.0,
-            showText: true,
-            value: random.nextDouble() * 100,
-          ),
-        ),
-      ];
-    });
-  }
+class HomePage extends HookWidget {
+  const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    // memoize is an object you hold onto until a point arrives where you no longer need it.
+    // This is useful for expensive calculations or objects that you want to reuse.
+    // final subject = useMemoized(() {
+    //   BehaviorSubject<String> subject = BehaviorSubject<String>();
+    //   return subject;
+    // }, [key]);
+    // create a BehaviorSubject every time widget is rebuilt
+    final subject = useMemoized(
+        () => BehaviorSubject<String>(), [key]);
+    // dispose the old BehaviorSubject when the widget is rebuilt
+    useEffect(() => subject.close, [subject]);
+
     return Scaffold(
-      appBar: AppBar(title: Text(widget.title)),
-      body: ListView.builder(
-        itemCount: listCharts.length,
-        itemBuilder: (context, index) {
-          return listCharts[index];
-        },
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _refillGraphs,
-        tooltip: 'Refill',
-        child: const Icon(Icons.add),
+      appBar: AppBar(
+          centerTitle: true,
+          title: StreamBuilder<String>(
+            stream: subject.stream
+                .distinct()
+                .debounceTime(
+                  const Duration(seconds: 1),
+                ),
+            initialData: 'God like',
+            builder: (context, snapshot) {
+              // why use snapshot.data ?? snapshot.requireData?
+              // snapshot.data can be null if the stream has not emitted any data yet.
+              // snapshot.requireData will throw an error if the stream has not emitted any data yet.
+              // This is useful to avoid null checks in the widget tree.
+              final text = snapshot.data ??
+                  snapshot.requireData;
+              return Text(
+                'You typed: ${text.isEmpty ? 'Nothing' : text}',
+                style:
+                    const TextStyle(fontSize: 20),
+              );
+            },
+          )),
+      body: Center(
+        child: Padding(
+          padding: const EdgeInsets.all(38.0),
+          child: TextField(
+            decoration: const InputDecoration(
+              labelText: 'Enter text',
+              border: OutlineInputBorder(),
+            ),
+            onChanged: subject.sink.add,
+          ),
+        ),
       ),
     );
   }

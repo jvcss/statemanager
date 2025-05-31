@@ -17,7 +17,7 @@ class App extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.black87),
         useMaterial3: true,
       ),
-      home: const HomePage(title: 'BI Visuals'),
+      home: const HomePage(),
     );
   }
 }
