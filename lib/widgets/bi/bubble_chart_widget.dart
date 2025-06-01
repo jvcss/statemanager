@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
 
-import 'package:statemanager/models/bubble_data.dart';
+import 'package:statemanager/models/bi/bubble_data.dart';
 
 class BubbleChartWidget extends StatefulWidget {
   const BubbleChartWidget({

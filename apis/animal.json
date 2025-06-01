@@ -1,0 +1,45 @@
+[
+    {
+        "name": "Giraffe",
+        "type": "Mammal",
+        "habitat": "Savannah",
+        "diet": "Herbivore",
+        "lifespan": "25 years",
+        "endangered": false,
+        "image": "https://example.com/images/giraffe.jpg",
+        "conservationStatus": "Least Concern",
+        "scientificName": "Giraffa camelopardalis",
+        "averageHeight": "4.5 to 6 meters",
+        "averageWeight": "800 to 1200 kg",
+        "description": "Giraffes are the tallest land animals, known for their long necks and legs. They primarily feed on leaves from tall trees."
+    }
+    ,
+    {
+        "name": "Elephant",
+        "type": "Mammal",
+        "habitat": "Grasslands, Forests",
+        "diet": "Herbivore",
+        "lifespan": "60 to 70 years",
+        "endangered": true,
+        "image": "https://example.com/images/elephant.jpg",
+        "conservationStatus": "Vulnerable",
+        "scientificName": "Loxodonta africana",
+        "averageHeight": "3 to 4 meters",
+        "averageWeight": "4000 to 7000 kg",
+        "description": "Elephants are the largest land mammals, known for their intelligence and strong social bonds. They have a long trunk used for feeding and drinking."
+    },
+    {
+        "name": "Penguin",
+        "type": "Bird",
+        "habitat": "Antarctic Regions",
+        "diet": "Carnivore",
+        "lifespan": "15 to 20 years",
+        "endangered": false,
+        "image": "https://example.com/images/penguin.jpg",
+        "conservationStatus": "Least Concern",
+        "scientificName": "Aptenodytes forsteri",
+        "averageHeight": "1.1 to 1.3 meters",
+        "averageWeight": "25 to 40 kg",
+        "description": "Penguins are flightless birds known for their distinctive black and white plumage. They are excellent swimmers and primarily feed on fish and krill."
+    }
+]

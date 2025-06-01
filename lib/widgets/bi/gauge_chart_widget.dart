@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
 
-import 'package:statemanager/models/gauge_data.dart';
+import 'package:statemanager/models/bi/gauge_data.dart';
 
 
 class GaugeChartWidget extends StatefulWidget {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
 
-import 'package:statemanager/models/scatter_data.dart';
+import 'package:statemanager/models/bi/scatter_data.dart';
 
 class ScatterChartWidget extends StatefulWidget {
   const ScatterChartWidget({

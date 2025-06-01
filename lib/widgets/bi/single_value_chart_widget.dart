@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:statemanager/models/single_value_data.dart';
+import 'package:statemanager/models/bi/single_value_data.dart';
 
 class SingleValueCardWidget extends StatelessWidget {
   const SingleValueCardWidget({

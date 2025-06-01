@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:statemanager/models/tree_map_data.dart';
+import 'package:statemanager/models/bi/tree_map_data.dart';
 
 class TreeMapChartWidget extends StatefulWidget {
   const TreeMapChartWidget({
