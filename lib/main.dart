@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:statemanager/home.dart';
+import 'package:statemanager/home_v2.dart';
 
 void main() {
   runApp(const App());

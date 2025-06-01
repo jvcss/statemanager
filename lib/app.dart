@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:developer' as developer;
-import 'pages/home_page.dart';
+import 'redux/pages/home_page.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
