@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:rive_native/rive_native.dart' as rive;
 
-import 'demos/hero_demo.dart';
+import 'demos/demos.dart';
 import 'app.dart';
 
 const _appBarColor = Color(0xFF323232);
@@ -52,12 +52,12 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   List<Demo> widgets = [
     Demo(const HeroDemo(), 'GDC Hero'),
-    // Demo(const HunterXDemo(), "Hunter X Demo"),
+    Demo(const HunterXDemo(), 'Hunter X Demo'),
+    Demo(const ExampleDataBindingImages(), 'Data Binding - Images'),
     // Demo(const ExampleBasic(), "Basic"),
     // Demo(const StabilityTest(), "Stability Test"),
     // Demo(const ExampleDataBinding(), "Data Binding - Basics"),
     // Demo(const ExampleDataBindingArtboards(), "Data Binding - Artboards"),
-    // Demo(const ExampleDataBindingImages(), "Data Binding - Images"),
     // Demo(const ExampleEvents(), "Events"),
     // Demo(const ExampleTextRuns(), "Updating Text Runs"),
     // Demo(const ExampleTextRunsNested(), "Updating Nested Text Runs"),
