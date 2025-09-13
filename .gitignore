@@ -15,12 +15,13 @@ migrate_working_dir/
 *.ipr
 *.iws
 .idea/
-
+/test/rive_native-0.0.10+1/
+/test/example/
 # The .vscode folder contains launch configuration and tasks you configure in
 # VS Code which you may wish to be included in version control, so this line
 # is commented out by default.
 #.vscode/
-
+test/example/build/
 # Flutter/Dart/Pub related
 **/doc/api/
 **/ios/Flutter/.last_build_id
