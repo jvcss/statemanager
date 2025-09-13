@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:rive_native/rive_native.dart' as rive;
 
 import 'demos/hero_demo.dart';
-import 'examples/examples.dart';
 import 'app.dart';
 
 const _appBarColor = Color(0xFF323232);
@@ -52,7 +51,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   List<Demo> widgets = [
-    Demo(const HeroDemo(), "GDC Hero"),
+    Demo(const HeroDemo(), 'GDC Hero'),
     // Demo(const HunterXDemo(), "Hunter X Demo"),
     // Demo(const ExampleBasic(), "Basic"),
     // Demo(const StabilityTest(), "Stability Test"),
@@ -76,7 +75,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Rive Native Examples"),
+        title: const Text('Rive Native Examples'),
       ),
       body: Column(
         children: [
@@ -102,8 +101,8 @@ class _HomePageState extends State<HomePage> {
           Padding(
               padding: const EdgeInsets.all(8.0),
               child: RiveExampleApp.isRiveRender
-                  ? const Text("Active Renderer: Rive")
-                  : const Text("Active Renderer: Flutter (Skia or Impeller)")),
+                  ? const Text('Active Renderer: Rive')
+                  : const Text('Active Renderer: Flutter (Skia or Impeller)')),
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: Row(
@@ -115,7 +114,7 @@ class _HomePageState extends State<HomePage> {
                       RiveExampleApp.isRiveRender = true;
                     });
                   },
-                  child: const Text("Rive Renderer"),
+                  child: const Text('Rive Renderer'),
                 ),
                 ElevatedButton(
                   onPressed: () {
@@ -123,7 +122,7 @@ class _HomePageState extends State<HomePage> {
                       RiveExampleApp.isRiveRender = false;
                     });
                   },
-                  child: const Text("Flutter Renderer"),
+                  child: const Text('Flutter Renderer'),
                 ),
               ],
             ),

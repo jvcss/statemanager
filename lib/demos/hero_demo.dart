@@ -45,11 +45,11 @@ class _HeroDemoState extends State<HeroDemo> {
       focusNode: _focusNode,
       onKeyEvent: _onKeyEvent,
       child: RivePlayer(
-        asset: "assets/hero.riv",
-        artboardName: "Main menu",
+        asset: 'assets/hero.riv',
+        artboardName: 'Main menu',
         fit: rive.Fit.layout,
         layoutScaleFactor: 1 / 2.0,
-        stateMachineName: "State Machine 1",
+        stateMachineName: 'State Machine 1',
         autoBind: true,
         withViewModelInstance: (viewModelInstance) {
           // access by view model path
