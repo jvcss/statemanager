@@ -9,7 +9,7 @@
 .history
 .svn/
 migrate_working_dir/
-
+test/rive_native-0.0.10+1
 # IntelliJ related
 *.iml
 *.ipr
